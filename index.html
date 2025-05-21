@@ -6,8 +6,9 @@
   <meta name="description" content="Portfolio of Guru Abhay Magapu, Java Backend Developer, Cloud Engineer, and Cybersecurity Expert">
   <meta name="keywords" content="Java, Spring Boot, AWS, backend developer, cloud engineering, cybersecurity, portfolio">
   <title>Guru Abhay Magapu | Portfolio</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="screen">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://via.placeholder.com/800x600.webp?text=Technology" as="image">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -16,13 +17,17 @@
       --primary-bg: #f3f4f6;
       --text-color: #1f2937;
       --card-bg: #ffffff;
-      --shadow: 6px 6px 12px rgba(0,0,0,0.1), -6px -6px 12px rgba(255,255,255,0.9);
+      --shadow: 0 4px 8px rgba(0,0,0,0.1);
+      --gradient-start: #3b82f6;
+      --gradient-end: #10b981;
     }
     [data-theme="dark"] {
       --primary-bg: #1f2937;
       --text-color: #f3f4f6;
-      --card-bg: #374151;
-      --shadow: 6px 6px 12px rgba(0,0,0,0.3), -6px -6px 12px rgba(255,255,255,0.1);
+      --card-bg: #4b5563;
+      --shadow: 0 4px 8px rgba(0,0,0,0.3);
+      --gradient-start: #2563eb;
+      --gradient-end: #059669;
     }
     body {
       background: var(--primary-bg);
@@ -32,21 +37,32 @@
     }
     .smooth-scroll { scroll-behavior: smooth; }
     .project, .certification, .publication {
+      background: var(--card-bg);
       box-shadow: var(--shadow);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.3s ease;
+      will-change: transform;
     }
     .project:hover, .certification:hover, .publication:hover {
       transform: translateY(-4px);
-      box-shadow: 8px 8px 16px rgba(0,0,0,0.2), -8px -8px 16px rgba(255,255,255,0.8);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
     }
     .bg-hero {
-      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://source.unsplash.com/random/1600x900/?technology');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url('https://via.placeholder.com/800x600.webp?text=Technology') center/cover no-repeat scroll;
+      will-change: background;
+      min-height: 500px;
+    }
+    @media (max-width: 768px) {
+      .bg-hero {
+        background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url('https://via.placeholder.com/400x300.webp?text=Technology') center/cover no-repeat scroll;
+        min-height: 400px;
+      }
+      .profile-img {
+        width: 200px !important;
+        height: 200px !important;
+      }
     }
     .gradient-border {
-      background: linear-gradient(to right, #3b82f6, #10b981);
+      background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
       padding: 2px;
       border-radius: 8px;
     }
@@ -56,17 +72,18 @@
       padding: 1rem;
     }
     .gradient-btn {
-      background: linear-gradient(to right, #3b82f6, #10b981);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+      transition: transform 0.3s ease;
     }
     .gradient-btn:hover {
       transform: scale(1.05);
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
     .profile-img {
-      border: 4px solid #fff;
+      border: 4px solid var(--card-bg);
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       transition: transform 0.3s ease;
+      will-change: transform, opacity;
     }
     .profile-img:hover { transform: scale(1.05); }
     .scroll-progress {
@@ -74,16 +91,28 @@
       top: 0;
       left: 0;
       height: 4px;
-      background: linear-gradient(to right, #3b82f6, #10b981);
+      background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
       z-index: 1000;
       transition: width 0.3s ease;
     }
     .hamburger-menu { display: none; }
     @media (max-width: 768px) {
       .nav-links { display: none; }
-      .nav-links.active { display: flex; flex-direction: column; position: absolute; top: 60px; left: 0; width: 100%; background: #1f2937; }
+      .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: var(--card-bg);
+      }
       .hamburger-menu { display: block; cursor: pointer; }
     }
+    .project, .certification, .publication { margin-bottom: 1.5rem; padding: 1.5rem; }
+    .skills-grid { gap: 1.5rem; }
+    .resume-btn { font-size: 1.25rem; padding: 0.75rem 1.5rem; }
+    .section-bg { background: var(--primary-bg); }
   </style>
 </head>
 <body class="smooth-scroll">
@@ -103,10 +132,9 @@
   <!-- Hero Section -->
   <section class="bg-hero text-white py-20">
     <div class="container mx-auto px-4 text-center">
-      <img src="https://raw.githubusercontent.com/guruabhaymagapu/guru-portfolio/main/profile.jpg" alt="Guru Abhay Magapu Profile Picture" class="profile-img w-32 h-32 rounded-full mx-auto mb-4">
       <h1 class="text-5xl font-bold animate-fade-in">Guru Abhay Magapu</h1>
       <p class="mt-4 text-xl animate-fade-in delay-100">Java Backend Developer | Cloud & Cybersecurity Expert | M.S. Computer Science @ UNT</p>
-      <a href="#contact" class="mt-6 inline-block gradient-btn text-white py-2 px-4 rounded-lg animate-fade-in delay-200">Get in Touch</a>
+      <a href="#contact" class="mt-6 inline-block gradient-btn text-white py-2 px-4 rounded-lg animate-fade-in delay-200" aria-label="Contact Me">Get in Touch</a>
     </div>
   </section>
 
@@ -125,64 +153,67 @@
   </nav>
 
   <!-- About Section -->
-  <section id="about" class="py-12">
+  <section id="about" class="py-12 section-bg">
     <div class="container mx-auto px-4">
       <div class="gradient-border">
-        <h2 class="text-3xl font-semibold pb-2 mb-6">About Me</h2>
+        <h2 class="text-3xl font-semibold pb-2 mb-6 animate-fade-in">About Me</h2>
       </div>
-      <p class="text-lg animate-fade-in">Master’s graduate in Computer Science from the University of North Texas (GPA: 3.72, May 2025), specializing in Java backend and full-stack development, cloud computing, and cybersecurity. Certified AWS Solutions Architect and Azure Fundamentals, I’ve led innovative projects in ransomware detection, travel management systems, and accessibility apps. My passion lies in designing secure, scalable solutions and exploring AI, system design, and emerging technologies. I’m eligible for F-1 OPT (STEM-eligible, July 2025) and open to U.S. relocation.</p>
+      <div class="flex flex-col md:flex-row items-center gap-6">
+        <img src="https://raw.githubusercontent.com/guruabhaymagapu/guru-portfolio/main/profile.jpg" alt="Guru Abhay Magapu Profile Picture" class="profile-img w-[350px] h-[350px] rounded-md animate-fade-in" width="350" height="350" loading="lazy" aria-label="Profile Picture">
+        <p class="text-lg animate-fade-in">Master’s graduate in Computer Science from the University of North Texas (GPA: 3.72, May 2025), specializing in Java backend and full-stack development, cloud computing, and cybersecurity. Certified AWS Solutions Architect and Azure Fundamentals, I’ve led innovative projects in ransomware detection, travel management systems, and accessibility apps. My passion lies in designing secure, scalable solutions and exploring AI, system design, and emerging technologies. I’m eligible for F-1 OPT (STEM-eligible, July 2025) and open to U.S. relocation.</p>
+      </div>
     </div>
   </section>
 
   <!-- Skills Section -->
-  <section id="skills" class="bg-gray-200 py-12">
+  <section id="skills" class="py-12 section-bg">
     <div class="container mx-auto px-4">
       <div class="gradient-border">
-        <h2 class="text-3xl font-semibold pb-2 mb-6">Skills</h2>
+        <h2 class="text-3xl font-semibold pb-2 mb-6 animate-fade-in">Skills</h2>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 animate-fade-in">
-        <div><i class="fa fa-code mr-2"></i><strong>Languages:</strong> Java, Python, C, JavaScript, SQL, HTML/CSS</div>
-        <div><i class="fa fa-tools mr-2"></i><strong>Frameworks/Tools:</strong> Spring Boot, Hibernate, Django, React, Flutter, Jenkins, Git, Firebase, RESTful APIs</div>
-        <div><i class="fa fa-cloud mr-2"></i><strong>Cloud/DevOps:</strong> AWS (EC2, S3, Lambda, RDS, CodePipeline), Azure, Google Cloud (BigQuery), Docker, Kubernetes</div>
-        <div><i class="fa fa-database mr-2"></i><strong>Databases:</strong> MySQL, MongoDB, Firebase Firestore</div>
-        <div><i class="fa fa-shield-alt mr-2"></i><strong>Cybersecurity:</strong> Malware Analysis, Ransomware Detection, VAPT, Encryption (RSA, Fernet), Web/Network Security</div>
-        <div><i class="fa fa-cogs mr-2"></i><strong>Other:</strong> Agile Methodologies, JUnit, Adobe XD, UI/UX Design, SEO</div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 skills-grid">
+        <div><i class="fa fa-code mr-2" aria-hidden="true"></i><strong>Languages:</strong> Java, Python, C, JavaScript, SQL, HTML/CSS</div>
+        <div><i class="fa fa-tools mr-2" aria-hidden="true"></i><strong>Frameworks/Tools:</strong> Spring Boot, Hibernate, Django, React, Flutter, Jenkins, Git, Firebase, RESTful APIs</div>
+        <div><i class="fa fa-cloud mr-2" aria-hidden="true"></i><strong>Cloud/DevOps:</strong> AWS (EC2, S3, Lambda, RDS, CodePipeline), Azure, Google Cloud (BigQuery), Docker, Kubernetes</div>
+        <div><i class="fa fa-database mr-2" aria-hidden="true"></i><strong>Databases:</strong> MySQL, MongoDB, Firebase Firestore</div>
+        <div><i class="fa fa-shield-alt mr-2" aria-hidden="true"></i><strong>Cybersecurity:</strong> Malware Analysis, Ransomware Detection, VAPT, Encryption (RSA, Fernet), Web/Network Security</div>
+        <div><i class="fa fa-cogs mr-2" aria-hidden="true"></i><strong>Other:</strong> Agile Methodologies, JUnit, Adobe XD, UI/UX Design, SEO</div>
       </div>
     </div>
   </section>
 
   <!-- Projects Section -->
-  <section id="projects" class="py-12">
+  <section id="projects" class="py-12 section-bg">
     <div class="container mx-auto px-4">
       <div class="gradient-border">
-        <h2 class="text-3xl font-semibold pb-2 mb-6">Projects</h2>
+        <h2 class="text-3xl font-semibold pb-2 mb-6 animate-fade-in">Projects</h2>
       </div>
-      <div class="space-y-6">
-        <div class="project bg-white p-4 rounded-lg animate-fade-in">
+      <div class="space-y-8">
+        <div class="project p-6 rounded-lg">
           <strong>Ransomware Detection System:</strong> Engineered a Python-based system using Watchdog, RSA, and Fernet encryption for real-time ransomware detection, simulating attacks and generating automated alerts for enterprise environments.
           <p class="mt-2"><strong>Skills Gained:</strong> Python programming, cybersecurity, encryption techniques, real-time monitoring, alert systems design</p>
-          <a href="https://github.com/guruabhaymagapu/Ransomware-Detection-System" target="_blank" class="text-blue-600 hover:underline">GitHub</a>
+          <a href="https://github.com/guruabhaymagapu/Ransomware-Detection-System" target="_blank" class="text-blue-600 hover:underline" aria-label="View Ransomware Detection System on GitHub">GitHub</a>
         </div>
-        <div class="project bg-white p-4 rounded-lg animate-fade-in delay-100">
+        <div class="project p-6 rounded-lg">
           <strong>TravelEase:</strong> Developed a full-stack travel agency platform with React, Django REST, MySQL, and Material UI, integrating secure authentication, real-time bookings, and loyalty programs.
           <p class="mt-2"><strong>Skills Gained:</strong> Full-stack development, React, Django, MySQL, secure authentication, UI/UX design</p>
         </div>
-        <div class="project bg-white p-4 rounded-lg animate-fade-in delay-200">
+        <div class="project p-6 rounded-lg">
           <strong>EasyMapAccess:</strong> Built a Flutter app with Google Maps API and Firebase Firestore to assist individuals with disabilities in locating accessible public spaces, featuring real-time map updates.
           <p class="mt-2"><strong>Skills Gained:</strong> Mobile app development, Flutter, Firebase, Google Maps API, accessibility-focused design</p>
-          <a href="https://github.com/guruabhaymagapu/EasyMapAccess" target="_blank" class="text-blue-600 hover:underline">GitHub</a>
+          <a href="https://github.com/guruabhaymagapu/EasyMapAccess" target="_blank" class="text-blue-600 hover:underline" aria-label="View EasyMapAccess on GitHub">GitHub</a>
         </div>
-        <div class="project bg-white p-4 rounded-lg animate-fade-in delay-300">
+        <div class="project p-6 rounded-lg">
           <strong>Energy Consumption Dashboard:</strong> Created interactive Python dashboards using Pandas, Matplotlib, Seaborn, and Plotly to analyze industry energy trends, enabling data-driven sustainability insights.
           <p class="mt-2"><strong>Skills Gained:</strong> Data visualization, Python, Pandas, Plotly, data analysis, sustainability insights</p>
-          <a href="https://github.com/guruabhaymagapu/Energy-Consumption-Data-Visualization-Tool" target="_blank" class="text-blue-600 hover:underline">GitHub</a>
+          <a href="https://github.com/guruabhaymagapu/Energy-Consumption-Data-Visualization-Tool" target="_blank" class="text-blue-600 hover:underline" aria-label="View Energy Consumption Dashboard on GitHub">GitHub</a>
         </div>
-        <div class="project bg-white p-4 rounded-lg animate-fade-in delay-400">
+        <div class="project p-6 rounded-lg">
           <strong>Blockchain for Food Supply Chain:</strong> Designed a Python-based blockchain prototype with block validation, proof-of-work, and SHA-256 hashing, demonstrating decentralized record-keeping.
           <p class="mt-2"><strong>Skills Gained:</strong> Blockchain development, Python, cryptography, decentralized systems, system design</p>
-          <a href="https://github.com/guruabhaymagapu/Blockchain-for-Food-Supply-Chain" target="_blank" class="text-blue-600 hover:underline">GitHub</a>
+          <a href="https://github.com/guruabhaymagapu/Blockchain-for-Food-Supply-Chain" target="_blank" class="text-blue-600 hover:underline" aria-label="View Blockchain for Food Supply Chain on GitHub">GitHub</a>
         </div>
-        <div class="project bg-white p-4 rounded-lg animate-fade-in delay-500">
+        <div class="project p-6 rounded-lg">
           <strong>Venture Capitalist Registration Platform:</strong> Developed a secure web platform with HTML, CSS, JavaScript, and SQL for investor profile management and authentication.
           <p class="mt-2"><strong>Skills Gained:</strong> Web development, JavaScript, SQL, secure authentication, database management</p>
         </div>
@@ -191,13 +222,13 @@
   </section>
 
   <!-- Experience Section -->
-  <section id="experience" class="bg-gray-200 py-12">
+  <section id="experience" class="py-12 section-bg">
     <div class="container mx-auto px-4">
       <div class="gradient-border">
-        <h2 class="text-3xl font-semibold pb-2 mb-6">Experience</h2>
+        <h2 class="text-3xl font-semibold pb-2 mb-6 animate-fade-in">Experience</h2>
       </div>
-      <div class="space-y-6">
-        <div class="bg-white p-4 rounded-lg animate-fade-in">
+      <div class="space-y-8">
+        <div class="project p-6 rounded-lg">
           <strong>Web Application Penetration Testing Intern, Indian Servers, Vijayawada, India | Jun 2021 - Nov 2021</strong>
           <p>Conducted in-depth Vulnerability Assessment and Penetration Testing (VAPT) on web applications, identifying and documenting security flaws across multiple platforms. Gained practical experience in malware analysis, network sniffing, and port scanning, helping to uncover critical threats and improve overall system defenses. Explored mobile application security, digital forensics basics, and Open-Source Intelligence (OSINT) tools and techniques to support broader cybersecurity investigations. Collaborated on secure coding guidelines and network security audits.</p>
           <p><strong>Key Contributions:</strong></p>
@@ -208,7 +239,7 @@
           </ul>
           <p class="mt-2"><strong>Skills Gained:</strong> VAPT, Burp Suite, OWASP ZAP, malware analysis, OSINT, network security, secure coding, teamwork</p>
         </div>
-        <div class="bg-white p-4 rounded-lg animate-fade-in delay-100">
+        <div class="project p-6 rounded-lg">
           <strong>Cloud & Web Development Intern, EduSkills Foundation, Vijayawada, India | Oct 2021 - Dec 2021</strong>
           <p>Designed and developed a responsive full-stack web application using HTML, CSS, and JavaScript, focused on delivering a seamless user experience. Integrated AWS services such as S3 (scalable storage) and Lambda (serverless backend logic), with deployment pipelines managed through AWS CodePipeline and Terraform for Infrastructure as Code. Built and deployed RESTful APIs with secure, low-latency delivery using AWS API Gateway and CloudFront. Implemented user authentication using AWS Cognito and OAuth protocols, ensuring data privacy and access control.</p>
           <p><strong>Key Achievements:</strong></p>
@@ -224,109 +255,107 @@
   </section>
 
   <!-- Certifications Section -->
-  <section id="certifications" class="py-12">
+  <section id="certifications" class="py-12 section-bg">
     <div class="container mx-auto px-4">
       <div class="gradient-border">
-        <h2 class="text-3xl font-semibold pb-2 mb-6">Certifications</h2>
+        <h2 class="text-3xl font-semibold pb-2 mb-6 animate-fade-in">Certifications</h2>
       </div>
-      <div class="space-y-4">
-        <div class="certification bg-white p-4 rounded-lg animate-fade-in">
-          <i class="fa fa-certificate mr-2"></i><strong>AWS Certified Solutions Architect - Associate</strong>, Amazon Web Services
+      <div class="space-y-6">
+        <div class="certification p-6 rounded-lg">
+          <i class="fa fa-certificate mr-2" aria-hidden="true"></i><strong>AWS Certified Solutions Architect - Associate</strong>, Amazon Web Services
           <p class="mt-2"><strong>Skills Gained:</strong> Cloud architecture, AWS service integration, scalability, cost optimization, security best practices</p>
         </div>
-        <div class="certification bg-white p-4 rounded-lg animate-fade-in delay-100">
-          <i class="fa fa-certificate mr-2"></i><strong>Microsoft Certified: Azure Fundamentals</strong>, Microsoft
+        <div class="certification p-6 rounded-lg">
+          <i class="fa fa-certificate mr-2" aria-hidden="true"></i><strong>Microsoft Certified: Azure Fundamentals</strong>, Microsoft
           <p class="mt-2"><strong>Skills Gained:</strong> Azure cloud fundamentals, service deployment, cloud security, resource management</p>
         </div>
-        <div class="certification bg-white p-4 rounded-lg animate-fade-in delay-200">
-          <i class="fa fa-certificate mr-2"></i><strong>Microsoft Azure AI Fundamentals</strong>, Microsoft
+        <div class="certification p-6 rounded-lg">
+          <i class="fa fa-certificate mr-2" aria-hidden="true"></i><strong>Microsoft Azure AI Fundamentals</strong>, Microsoft
           <p class="mt-2"><strong>Skills Gained:</strong> AI concepts, Azure AI services, machine learning basics</p>
         </div>
-        <div class="certification bg-white p-4 rounded-lg animate-fade-in delay-300">
-          <i class="fa fa-certificate mr-2"></i><strong>Oracle Cloud Infrastructure Foundations Associate</strong>, Oracle
+        <div class="certification p-6 rounded-lg">
+          <i class="fa fa-certificate mr-2" aria-hidden="true"></i><strong>Oracle Cloud Infrastructure Foundations Associate</strong>, Oracle
           <p class="mt-2"><strong>Skills Gained:</strong> Oracle Cloud basics, infrastructure management, cloud deployment</p>
         </div>
-        <div class="certification bg-white p-4 rounded-lg animate-fade-in delay-400">
-          <i class="fa fa-certificate mr-2"></i><strong>Full-Stack Web Development with React</strong>, The Hong Kong University of Science and Technology (Coursera)
+        <div class="certification p-6 rounded-lg">
+          <i class="fa fa-certificate mr-2" aria-hidden="true"></i><strong>Full-Stack Web Development with React</strong>, The Hong Kong University of Science and Technology (Coursera)
           <p class="mt-2"><strong>Skills Gained:</strong> React development, full-stack architecture, front-end design, API integration</p>
         </div>
-        <div class="certification bg-white p-4 rounded-lg animate-fade-in delay-500">
-          <i class="fa fa-certificate mr-2"></i><strong>Blockchain</strong>, University at Buffalo, The State University of New York (Coursera)
+        <div class="certification p-6 rounded-lg">
+          <i class="fa fa-certificate mr-2" aria-hidden="true"></i><strong>Blockchain</strong>, University at Buffalo, The State University of New York (Coursera)
           <p class="mt-2"><strong>Skills Gained:</strong> Blockchain fundamentals, smart contracts, decentralized applications</p>
         </div>
-        <div class="certification bg-white p-4 rounded-lg animate-fade-in delay-600">
-          <i class="fa fa-certificate mr-2"></i><strong>Search Engine Optimization (SEO)</strong>, University of California, Davis (Coursera)
+        <div class="certification p-6 rounded-lg">
+          <i class="fa fa-certificate mr-2" aria-hidden="true"></i><strong>Search Engine Optimization (SEO)</strong>, University of California, Davis (Coursera)
           <p class="mt-2"><strong>Skills Gained:</strong> SEO strategies, keyword optimization, website visibility</p>
         </div>
-        <div class="certification bg-white p-4 rounded-lg animate-fade-in delay-700">
-          <i class="fa fa-certificate mr-2"></i><strong>Software Development Lifecycle</strong>, University of Minnesota (Coursera)
+        <div class="certification p-6 rounded-lg">
+          <i class="fa fa-certificate mr-2" aria-hidden="true"></i><strong>Software Development Lifecycle</strong>, University of Minnesota (Coursera)
           <p class="mt-2"><strong>Skills Gained:</strong> SDLC methodologies, Agile practices, project management</p>
         </div>
       </div>
     </div>
   </section>
 
-
-
   <!-- Publications Section -->
-  <section id="publications" class="py-12">
+  <section id="publications" class="py-12 section-bg">
     <div class="container mx-auto px-4">
       <div class="gradient-border">
-        <h2 class="text-3xl font-semibold pb-2 mb-6">Publications</h2>
+        <h2 class="text-3xl font-semibold pb-2 mb-6 animate-fade-in">Publications</h2>
       </div>
-      <div class="space-y-4">
-        <div class="publication bg-white p-4 rounded-lg animate-fade-in">
+      <div class="space-y-6">
+        <div class="publication p-6 rounded-lg">
           <strong>Detect, React: Ransomware Detection and Mitigation System</strong>, ResearchGate
           <p>Simulated ransomware attacks using hybrid encryption (Fernet + RSA) and demonstrated real-time detection with Python’s Watchdog library.</p>
         </div>
-        <div class="publication bg-white p-4 rounded-lg animate-fade-in delay-100">
+        <div class="publication p-6 rounded-lg">
           <strong>Old Errors, New Threats: The Ongoing Impact of IP Spoofing</strong>, ResearchGate
           <p>Analyzed IP spoofing techniques and proposed mitigation strategies for modern network security.</p>
         </div>
-        <div class="publication bg-white p-4 rounded-lg animate-fade-in delay-200">
+        <div class="publication p-6 rounded-lg">
           <strong>Closing the Gap Between Directed Hopsets and Shortcut Sets</strong>, ResearchGate
           <p>Optimized hopset size and hop count in directed graphs for efficient network algorithms.</p>
         </div>
-        <div class="publication bg-white p-4 rounded-lg animate-fade-in delay-300">
+        <div class="publication p-6 rounded-lg">
           <strong>Energy Consumption Visualization by Industry</strong>, ResearchGate
           <p>Designed interactive visualizations to analyze industrial energy usage for sustainability.</p>
         </div>
-        <div class="publication bg-white p-4 rounded-lg animate-fade-in delay-400">
-          <a href="https://www.researchgate.net/profile/Guru-Abhay-Magapu/research" target="_blank" class="text-blue-600 hover:underline">View All Publications</a>
+        <div class="publication p-6 rounded-lg">
+          <a href="https://www.researchgate.net/profile/Guru-Abhay-Magapu/research" target="_blank" class="text-blue-600 hover:underline" aria-label="View All Publications on ResearchGate">View All Publications</a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Resume Section -->
-  <section id="resume" class="py-12">
+  <section id="resume" class="py-12 section-bg">
     <div class="container mx-auto px-4 text-center">
       <div class="gradient-border">
-        <h2 class="text-3xl font-semibold pb-2 mb-6">Resume</h2>
+        <h2 class="text-3xl font-semibold pb-2 mb-6 animate-fade-in">Resume</h2>
       </div>
       <p class="text-lg mb-4 animate-fade-in">Download my detailed resume to explore my full professional journey.</p>
-      <a href="https://drive.google.com/file/d/1zHUPoD35w_MWg7NV6Rl8v3S0nLHLj4os/view?usp=sharing" class="inline-block gradient-btn text-white py-2 px-4 rounded-lg animate-fade-in delay-100" target="_blank">Download Resume (PDF)</a>
+      <a href="https://drive.google.com/file/d/1zHUPoD35w_MWg7NV6Rl8v3S0nLHLj4os/view?usp=sharing" class="inline-block gradient-btn text-white resume-btn rounded-lg animate-fade-in delay-100" target="_blank" aria-label="Download Resume">Download Resume (PDF)</a>
     </div>
   </section>
 
   <!-- Contact Section -->
-  <section id="contact" class="bg-gray-200 py-12">
+  <section id="contact" class="py-12 section-bg">
     <div class="container mx-auto px-4 text-center">
       <div class="gradient-border">
-        <h2 class="text-3xl font-semibold pb-2 mb-6">Contact</h2>
+        <h2 class="text-3xl font-semibold pb-2 mb-6 animate-fade-in">Contact</h2>
       </div>
-      <div class="space-y-4 animate-fade-in">
+      <div class="space-y-4">
         <div><i class="fa fa-envelope mr-2" aria-label="Email"></i> guruabhaymagapu@my.unt.edu</div>
         <div><i class="fa fa-phone mr-2" aria-label="Phone"></i> +1 940-843-6924</div>
-        <div><i class="fab fa-linkedin mr-2" aria-label="LinkedIn"></i> <a href="https://www.linkedin.com/in/guruabhay-magapu/" target="_blank" class="text-blue-600 hover:underline">LinkedIn</a></div>
-        <div><i class="fab fa-github mr-2" aria-label="GitHub"></i> <a href="https://github.com/guruabhay" target="_blank" class="text-blue-600 hover:underline">GitHub</a></div>
-        <div><i class="fa fa-globe mr-2" aria-label="Portfolio"></i> <a href="https://guruabhaymagapu.github.io/guru-portfolio/" class="text-blue-600 hover:underline">Portfolio</a></div>
+        <div><i class="fab fa-linkedin mr-2" aria-label="LinkedIn"></i> <a href="https://www.linkedin.com/in/guruabhay-magapu/" target="_blank" class="text-blue-600 hover:underline" aria-label="LinkedIn Profile">LinkedIn</a></div>
+        <div><i class="fab fa-github mr-2" aria-label="GitHub"></i> <a href="https://github.com/guruabhay" target="_blank" class="text-blue-600 hover:underline" aria-label="GitHub Profile">GitHub</a></div>
+        <div><i class="fa fa-globe mr-2" aria-label="Portfolio"></i> <a href="https://guruabhaymagapu.github.io/guru-portfolio/" class="text-blue-600 hover:underline" aria-label="Portfolio Website">Portfolio</a></div>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-gray-900 text-white py-4">
+  <footer class="section-bg text-white py-4">
     <div class="container mx-auto px-4 text-center">
       <p>© 2019-2025 Guru Abhay Magapu | All Rights Reserved</p>
     </div>
@@ -334,9 +363,22 @@
 
   <!-- JavaScript for Animations, Dark Mode, Scroll Progress, and Hamburger Menu -->
   <script>
-    // GSAP Animations
+    // Debounce function to limit scroll event frequency
+    function debounce(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
+    }
+
+    // GSAP Animations (limited to section headers and key elements)
     gsap.registerPlugin(ScrollTrigger);
-    gsap.utils.toArray(".animate-fade-in").forEach((el, i) => {
+    gsap.utils.toArray("h2.animate-fade-in, .profile-img, .gradient-btn, .about p").forEach((el, i) => {
       gsap.from(el, {
         opacity: 0,
         y: 20,
@@ -344,7 +386,8 @@
         delay: i * 0.1,
         scrollTrigger: {
           trigger: el,
-          start: "top 80%",
+          start: "top 90%",
+          toggleActions: "play none none reverse",
         },
       });
     });
@@ -358,26 +401,33 @@
       toggleBtn.innerHTML = `<i class="fa fa-${isDark ? 'moon' : 'sun'}"></i>`;
     });
 
-    // Scroll Progress Bar
-    window.addEventListener('scroll', () => {
+    // Scroll Progress Bar (debounced)
+    const updateScrollProgress = debounce(() => {
       const winScroll = document.documentElement.scrollTop;
       const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrolled = (winScroll / height) * 100;
       document.querySelector('.scroll-progress').style.width = scrolled + '%';
-    });
+    }, 50);
+    window.addEventListener('scroll', updateScrollProgress);
 
     // Scroll-to-Top Button
-    window.addEventListener('scroll', () => {
-      const scrollTopBtn = document.createElement('button');
-      scrollTopBtn.innerHTML = '<i class="fa fa-arrow-up"></i>';
-      scrollTopBtn.className = 'fixed bottom-4 right-4 bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700';
-      scrollTopBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
-      if (window.scrollY > 300 && !document.querySelector('.fixed.bottom-4')) {
-        document.body.appendChild(scrollTopBtn);
-      } else if (window.scrollY <= 300) {
-        document.querySelector('.fixed.bottom-4')?.remove();
+    let scrollTopBtn = null;
+    const updateScrollTopBtn = debounce(() => {
+      if (window.scrollY > 300) {
+        if (!scrollTopBtn) {
+          scrollTopBtn = document.createElement('button');
+          scrollTopBtn.innerHTML = '<i class="fa fa-arrow-up"></i>';
+          scrollTopBtn.className = 'fixed bottom-4 right-4 bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700';
+          scrollTopBtn.setAttribute('aria-label', 'Scroll to Top');
+          scrollTopBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+          document.body.appendChild(scrollTopBtn);
+        }
+      } else if (scrollTopBtn) {
+        scrollTopBtn.remove();
+        scrollTopBtn = null;
       }
-    });
+    }, 50);
+    window.addEventListener('scroll', updateScrollTopBtn);
 
     // Hamburger Menu
     const hamburger = document.querySelector('.hamburger-menu');
