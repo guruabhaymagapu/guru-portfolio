@@ -1,331 +1,441 @@
-<!DOCTYPE html>
+this is my portfolio in github i need you change to soc l1 based on the info you have until now <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<meta name="description" content="Guru Abhay Magapu - SOC Analyst Portfolio showcasing SIEM (Splunk), log analysis, security monitoring, and cybersecurity labs.">
-<meta name="keywords" content="SOC Analyst, Splunk SIEM, Log Analysis, Security Monitoring, Cybersecurity Portfolio, Threat Detection, Networking Security">
-
-<title>Guru Abhay Magapu | SOC Analyst Portfolio</title>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-
-<style>
-
-body{
-font-family:'Inter',sans-serif;
-background:#f3f4f6;
-color:#1f2937;
-}
-
-.project,.certification{
-background:white;
-padding:20px;
-border-radius:8px;
-box-shadow:0 4px 8px rgba(0,0,0,0.1);
-}
-
-.project:hover{
-transform:translateY(-4px);
-transition:.3s;
-}
-
-.bg-hero{
-background:linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.4)),
-url("https://via.placeholder.com/1200x600");
-background-size:cover;
-background-position:center;
-}
-
-</style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of Guru Abhay Magapu, Java Backend Developer, Cloud Engineer, and Cybersecurity Expert">
+  <meta name="keywords" content="Java, Spring Boot, AWS, backend developer, cloud engineering, cybersecurity, portfolio">
+  <title>Guru Abhay Magapu | Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="screen">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://via.placeholder.com/800x600.webp?text=Technology" as="image">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <style>
+    :root {
+      --primary-bg: #f3f4f6;
+      --text-color: #1f2937;
+      --card-bg: #ffffff;
+      --shadow: 0 4px 8px rgba(0,0,0,0.1);
+      --gradient-start: #3b82f6;
+      --gradient-end: #10b981;
+    }
+    [data-theme="dark"] {
+      --primary-bg: #1f2937;
+      --text-color: #f3f4f6;
+      --card-bg: #4b5563;
+      --shadow: 0 4px 8px rgba(0,0,0,0.3);
+      --gradient-start: #2563eb;
+      --gradient-end: #059669;
+    }
+    body {
+      background: var(--primary-bg);
+      color: var(--text-color);
+      font-family: 'Inter', sans-serif;
+      transition: background 0.3s, color 0.3s;
+    }
+    .smooth-scroll { scroll-behavior: smooth; }
+    .project, .certification, .publication {
+      background: var(--card-bg);
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease;
+      will-change: transform;
+    }
+    .project:hover, .certification:hover, .publication:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+    .bg-hero {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url('https://via.placeholder.com/800x600.webp?text=Technology') center/cover no-repeat scroll;
+      will-change: background;
+      min-height: 500px;
+    }
+    @media (max-width: 768px) {
+      .bg-hero {
+        background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url('https://via.placeholder.com/400x300.webp?text=Technology') center/cover no-repeat scroll;
+        min-height: 400px;
+      }
+      .profile-img {
+        width: 200px !important;
+        height: 200px !important;
+      }
+    }
+    .gradient-border {
+      background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+      padding: 2px;
+      border-radius: 8px;
+    }
+    .gradient-border > * {
+      background: var(--card-bg);
+      border-radius: 6px;
+      padding: 1rem;
+    }
+    .gradient-btn {
+      background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+      transition: transform 0.3s ease;
+    }
+    .gradient-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .profile-img {
+      border: 4px solid var(--card-bg);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+      will-change: transform, opacity;
+    }
+    .profile-img:hover { transform: scale(1.05); }
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+      z-index: 1000;
+      transition: width 0.3s ease;
+    }
+    .hamburger-menu { display: none; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: var(--card-bg);
+      }
+      .hamburger-menu { display: block; cursor: pointer; }
+    }
+    .project, .certification, .publication { margin-bottom: 1.5rem; padding: 1.5rem; }
+    .skills-grid { gap: 1.5rem; }
+    .resume-btn { font-size: 1.25rem; padding: 0.75rem 1.5rem; }
+    .section-bg { background: var(--primary-bg); }
+  </style>
 </head>
-
-<body>
-
-<!-- HERO -->
-
-<section class="bg-hero text-white py-24 text-center">
-
-<h1 class="text-5xl font-bold">Guru Abhay Magapu</h1>
-
-<p class="mt-4 text-xl">
-SOC Analyst | SIEM (Splunk) | Log Analysis | Security Monitoring | Network Security
-</p>
-
-</section>
-
-
-<!-- NAV -->
-
-<nav class="bg-gray-900 text-white py-4 text-center space-x-6 sticky top-0">
-
-<a href="#about">About</a>
-<a href="#skills">Skills</a>
-<a href="#projects">Projects</a>
-<a href="#experience">Experience</a>
-<a href="#certifications">Certifications</a>
-<a href="#contact">Contact</a>
-
-</nav>
-
-
-<!-- ABOUT -->
-
-<section id="about" class="py-16">
-
-<div class="container mx-auto px-6 max-w-5xl">
-
-<h2 class="text-3xl font-semibold mb-6">About Me</h2>
-
-<p class="text-lg">
-
-Master’s graduate in Computer Science from the University of North Texas with a focus on cybersecurity and Security Operations Center (SOC) practices. Experienced in SIEM-based security monitoring using Splunk, log analysis, and security event investigation through hands-on SOC lab environments.
-
-Skilled in networking fundamentals including TCP/IP, subnetting, VLAN configuration, and packet analysis relevant to SOC monitoring. AWS Certified Solutions Architect and Microsoft Azure Fundamentals certified with practical experience in threat detection, vulnerability assessment, and security analysis.
-
-</p>
-
-</div>
-
-</section>
-
-
-<!-- SKILLS -->
-
-<section id="skills" class="py-16 bg-gray-100">
-
-<div class="container mx-auto px-6 max-w-6xl">
-
-<h2 class="text-3xl font-semibold mb-10">Skills</h2>
-
-<div class="grid md:grid-cols-3 gap-6 text-lg">
-
-<div>
-<strong>SIEM & Monitoring</strong><br>
-Splunk, SPL Queries, Log Analysis, Event Correlation
-</div>
-
-<div>
-<strong>Networking</strong><br>
-TCP/IP, DNS, HTTP/HTTPS, VLANs, Subnetting, DHCP
-</div>
-
-<div>
-<strong>Cybersecurity</strong><br>
-Threat Detection, Incident Investigation, Vulnerability Assessment
-</div>
-
-<div>
-<strong>Security Tools</strong><br>
-Wireshark, Nmap, Linux, Cisco Packet Tracer
-</div>
-
-<div>
-<strong>Cloud</strong><br>
-AWS, Microsoft Azure
-</div>
-
-<div>
-<strong>Programming</strong><br>
-Python, Java, SQL
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- PROJECTS -->
-
-<section id="projects" class="py-16">
-
-<div class="container mx-auto px-6 max-w-6xl">
-
-<h2 class="text-3xl font-semibold mb-10">Projects</h2>
-
-<div class="space-y-6">
-
-<div class="project">
-
-<strong>SIEM Log Analysis & Security Monitoring (Splunk)</strong>
-
-<p class="mt-2">
-
-Performed security log monitoring and event investigation using Splunk SIEM in a simulated SOC lab environment. Created SPL queries for log analysis, event correlation, and anomaly detection while building dashboards for security event monitoring.
-
-</p>
-
-<a href="https://github.com/guruabhaymagapu/cybersecurity/tree/main/soc-labs/siem-splunk" target="_blank" class="text-blue-600">
-GitHub Repository
-</a>
-
-</div>
-
-
-<div class="project">
-
-<strong>SOC Networking Labs (Cisco Packet Tracer)</strong>
-
-<p class="mt-2">
-
-Implemented networking labs covering VLAN configuration, subnetting, DHCP, and routing. Analyzed TCP/IP communication and packet flow concepts relevant to SOC monitoring environments.
-
-</p>
-
-<a href="https://github.com/guruabhaymagapu/cybersecurity/tree/main/soc-labs/networking" target="_blank" class="text-blue-600">
-GitHub Repository
-</a>
-
-</div>
-
-
-<div class="project">
-
-<strong>Ransomware Detection System (Python)</strong>
-
-<p class="mt-2">
-
-Developed a Python-based ransomware detection prototype using file system monitoring. Simulated ransomware attacks using RSA and Fernet encryption to detect abnormal file modification behavior.
-
-</p>
-
-<a href="https://github.com/guruabhaymagapu/Ransomware-Detection-System" target="_blank" class="text-blue-600">
-GitHub Repository
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- EXPERIENCE -->
-
-<section id="experience" class="py-16 bg-gray-100">
-
-<div class="container mx-auto px-6 max-w-6xl">
-
-<h2 class="text-3xl font-semibold mb-10">Experience</h2>
-
-<div class="space-y-6">
-
-<div class="project">
-
-<strong>SOC Analyst (SIEM – Splunk) | Self-Hosted SOC Lab | 2026 – Present</strong>
-
-<p class="mt-2">
-
-Performing hands-on security monitoring and log analysis using Splunk SIEM in a simulated SOC environment. Writing SPL queries for event correlation and investigating suspicious activity while documenting SOC investigation workflows.
-
-</p>
-
-</div>
-
-
-<div class="project">
-
-<strong>Web Application Penetration Testing Intern | Indian Servers | 2021</strong>
-
-<p class="mt-2">
-
-Conducted vulnerability assessments and penetration testing on web applications using Burp Suite and OWASP ZAP. Identified security vulnerabilities and documented remediation recommendations.
-
-</p>
-
-</div>
-
-
-<div class="project">
-
-<strong>Cloud & Web Development Intern | EduSkills Foundation | 2021</strong>
-
-<p class="mt-2">
-
-Developed web applications deployed on AWS infrastructure using EC2, S3, and RDS while implementing CI/CD pipelines with AWS CodePipeline and Terraform.
-
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- CERTIFICATIONS -->
-
-<section id="certifications" class="py-16">
-
-<div class="container mx-auto px-6 max-w-5xl">
-
-<h2 class="text-3xl font-semibold mb-8">Certifications</h2>
-
-<div class="space-y-4">
-
-<div class="certification">
-AWS Certified Solutions Architect – Associate
-</div>
-
-<div class="certification">
-Microsoft Certified: Azure Fundamentals (AZ-900)
-</div>
-
-<div class="certification">
-Cisco Networking Basics
-</div>
-
-<div class="certification">
-Splunk Fundamentals (SIEM & Log Analysis)
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- CONTACT -->
-
-<section id="contact" class="py-16 bg-gray-100">
-
-<div class="container mx-auto px-6 text-center">
-
-<h2 class="text-3xl font-semibold mb-8">Contact</h2>
-
-<p>Email: guruabhaymagapu@gmail.com</p>
-
-<p class="mt-2">
-LinkedIn:
-<a href="https://linkedin.com/in/guruabhay-magapu" class="text-blue-600">Profile</a>
-</p>
-
-<p class="mt-2">
-GitHub:
-<a href="https://github.com/guruabhaymagapu" class="text-blue-600">Repository</a>
-</p>
-
-</div>
-
-</section>
-
-
-<footer class="bg-gray-900 text-white py-6 text-center">
-
-© 2026 Guru Abhay Magapu
-
-</footer>
-
+<body class="smooth-scroll">
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress"></div>
+
+  <!-- Dark Mode Toggle -->
+  <button id="theme-toggle" class="fixed top-4 right-12 bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 z-20" aria-label="Toggle Dark Mode">
+    <i class="fa fa-moon"></i>
+  </button>
+
+  <!-- Hamburger Menu -->
+  <div class="hamburger-menu fixed top-4 right-4 text-white text-2xl z-20 md:hidden">
+    <i class="fa fa-bars"></i>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="bg-hero text-white py-20">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-5xl font-bold animate-fade-in">Guru Abhay Magapu</h1>
+      <p class="mt-4 text-xl animate-fade-in delay-100">Java Backend Developer | Cloud & Cybersecurity Expert | M.S. Computer Science @ UNT</p>
+      <a href="#contact" class="mt-6 inline-block gradient-btn text-white py-2 px-4 rounded-lg animate-fade-in delay-200" aria-label="Contact Me">Get in Touch</a>
+    </div>
+  </section>
+
+  <!-- Navigation -->
+  <nav class="bg-gray-900 text-white py-4 sticky top-0 z-10">
+    <div class="container mx-auto px-4 flex justify-center gap-6 nav-links">
+      <a href="#about" class="hover:text-blue-400">About</a>
+      <a href="#skills" class="hover:text-blue-400">Skills</a>
+      <a href="#projects" class="hover:text-blue-400">Projects</a>
+      <a href="#experience" class="hover:text-blue-400">Experience</a>
+      <a href="#certifications" class="hover:text-blue-400">Certifications</a>
+      <a href="#publications" class="hover:text-blue-400">Publications</a>
+      <a href="#resume" class="hover:text-blue-400">Resume</a>
+      <a href="#contact" class="hover:text-blue-400">Contact</a>
+    </div>
+  </nav>
+
+  <!-- About Section -->
+  <section id="about" class="py-12 section-bg">
+    <div class="container mx-auto px-4">
+      <div class="gradient-border">
+        <h2 class="text-3xl font-semibold pb-2 mb-6 animate-fade-in">About Me</h2>
+      </div>
+      <div class="flex flex-col md:flex-row items-center gap-6">
+        <img src="https://raw.githubusercontent.com/guruabhaymagapu/guru-portfolio/main/profile.jpg" alt="Guru Abhay Magapu Profile Picture" class="profile-img w-[350px] h-[350px] rounded-md animate-fade-in" width="350" height="350" loading="lazy" aria-label="Profile Picture">
+        <p class="text-lg animate-fade-in">Master’s graduate in Computer Science from the University of North Texas (GPA: 3.72, May 2025), specializing in Java backend and full-stack development, cloud computing, and cybersecurity. Certified AWS Solutions Architect and Azure Fundamentals, I’ve led innovative projects in ransomware detection, travel management systems, and accessibility apps. My passion lies in designing secure, scalable solutions and exploring AI, system design, and emerging technologies. I’m eligible for F-1 OPT (STEM-eligible, July 2025) and open to U.S. relocation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="py-12 section-bg">
+    <div class="container mx-auto px-4">
+      <div class="gradient-border">
+        <h2 class="text-3xl font-semibold pb-2 mb-6 animate-fade-in">Skills</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 skills-grid">
+        <div><i class="fa fa-code mr-2" aria-hidden="true"></i><strong>Languages:</strong> Java, Python, C, JavaScript, SQL, HTML/CSS</div>
+        <div><i class="fa fa-tools mr-2" aria-hidden="true"></i><strong>Frameworks/Tools:</strong> Spring Boot, Hibernate, Django, React, Flutter, Jenkins, Git, Firebase, RESTful APIs</div>
+        <div><i class="fa fa-cloud mr-2" aria-hidden="true"></i><strong>Cloud/DevOps:</strong> AWS (EC2, S3, Lambda, RDS, CodePipeline), Azure, Google Cloud (BigQuery), Docker, Kubernetes</div>
+        <div><i class="fa fa-database mr-2" aria-hidden="true"></i><strong>Databases:</strong> MySQL, MongoDB, Firebase Firestore</div>
+        <div><i class="fa fa-shield-alt mr-2" aria-hidden="true"></i><strong>Cybersecurity:</strong> Malware Analysis, Ransomware Detection, VAPT, Encryption (RSA, Fernet), Web/Network Security</div>
+        <div><i class="fa fa-cogs mr-2" aria-hidden="true"></i><strong>Other:</strong> Agile Methodologies, JUnit, Adobe XD, UI/UX Design, SEO</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="py-12 section-bg">
+    <div class="container mx-auto px-4">
+      <div class="gradient-border">
+        <h2 class="text-3xl font-semibold pb-2 mb-6 animate-fade-in">Projects</h2>
+      </div>
+      <div class="space-y-8">
+        <div class="project p-6 rounded-lg">
+          <strong>Ransomware Detection System:</strong> Engineered a Python-based system using Watchdog, RSA, and Fernet encryption for real-time ransomware detection, simulating attacks and generating automated alerts for enterprise environments.
+          <p class="mt-2"><strong>Skills Gained:</strong> Python programming, cybersecurity, encryption techniques, real-time monitoring, alert systems design</p>
+          <a href="https://github.com/guruabhaymagapu/Ransomware-Detection-System" target="_blank" class="text-blue-600 hover:underline" aria-label="View Ransomware Detection System on GitHub">GitHub</a>
+        </div>
+        <div class="project p-6 rounded-lg">
+          <strong>TravelEase:</strong> Developed a full-stack travel agency platform with React, Django REST, MySQL, and Material UI, integrating secure authentication, real-time bookings, and loyalty programs.
+          <p class="mt-2"><strong>Skills Gained:</strong> Full-stack development, React, Django, MySQL, secure authentication, UI/UX design</p>
+        </div>
+        <div class="project p-6 rounded-lg">
+          <strong>EasyMapAccess:</strong> Built a Flutter app with Google Maps API and Firebase Firestore to assist individuals with disabilities in locating accessible public spaces, featuring real-time map updates.
+          <p class="mt-2"><strong>Skills Gained:</strong> Mobile app development, Flutter, Firebase, Google Maps API, accessibility-focused design</p>
+          <a href="https://github.com/guruabhaymagapu/EasyMapAccess" target="_blank" class="text-blue-600 hover:underline" aria-label="View EasyMapAccess on GitHub">GitHub</a>
+        </div>
+        <div class="project p-6 rounded-lg">
+          <strong>Energy Consumption Dashboard:</strong> Created interactive Python dashboards using Pandas, Matplotlib, Seaborn, and Plotly to analyze industry energy trends, enabling data-driven sustainability insights.
+          <p class="mt-2"><strong>Skills Gained:</strong> Data visualization, Python, Pandas, Plotly, data analysis, sustainability insights</p>
+          <a href="https://github.com/guruabhaymagapu/Energy-Consumption-Data-Visualization-Tool" target="_blank" class="text-blue-600 hover:underline" aria-label="View Energy Consumption Dashboard on GitHub">GitHub</a>
+        </div>
+        <div class="project p-6 rounded-lg">
+          <strong>Blockchain for Food Supply Chain:</strong> Designed a Python-based blockchain prototype with block validation, proof-of-work, and SHA-256 hashing, demonstrating decentralized record-keeping.
+          <p class="mt-2"><strong>Skills Gained:</strong> Blockchain development, Python, cryptography, decentralized systems, system design</p>
+          <a href="https://github.com/guruabhaymagapu/Blockchain-for-Food-Supply-Chain" target="_blank" class="text-blue-600 hover:underline" aria-label="View Blockchain for Food Supply Chain on GitHub">GitHub</a>
+        </div>
+        <div class="project p-6 rounded-lg">
+          <strong>Venture Capitalist Registration Platform:</strong> Developed a secure web platform with HTML, CSS, JavaScript, and SQL for investor profile management and authentication.
+          <p class="mt-2"><strong>Skills Gained:</strong> Web development, JavaScript, SQL, secure authentication, database management</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <section id="experience" class="py-12 section-bg">
+    <div class="container mx-auto px-4">
+      <div class="gradient-border">
+        <h2 class="text-3xl font-semibold pb-2 mb-6 animate-fade-in">Experience</h2>
+      </div>
+      <div class="space-y-8">
+        <div class="project p-6 rounded-lg">
+          <strong>Web Application Penetration Testing Intern, Indian Servers, Vijayawada, India | Jun 2021 - Nov 2021</strong>
+          <p>Conducted in-depth Vulnerability Assessment and Penetration Testing (VAPT) on web applications, identifying and documenting security flaws across multiple platforms. Gained practical experience in malware analysis, network sniffing, and port scanning, helping to uncover critical threats and improve overall system defenses. Explored mobile application security, digital forensics basics, and Open-Source Intelligence (OSINT) tools and techniques to support broader cybersecurity investigations. Collaborated on secure coding guidelines and network security audits.</p>
+          <p><strong>Key Contributions:</strong></p>
+          <ul class="list-disc pl-5">
+            <li>Discovered and reported multiple critical vulnerabilities in test web applications.</li>
+            <li>Enhanced threat detection by applying OSINT methodologies and forensic analysis.</li>
+            <li>Strengthened web and mobile application defenses through simulated attacks and exploit validation.</li>
+          </ul>
+          <p class="mt-2"><strong>Skills Gained:</strong> VAPT, Burp Suite, OWASP ZAP, malware analysis, OSINT, network security, secure coding, teamwork</p>
+        </div>
+        <div class="project p-6 rounded-lg">
+          <strong>Cloud & Web Development Intern, EduSkills Foundation, Vijayawada, India | Oct 2021 - Dec 2021</strong>
+          <p>Designed and developed a responsive full-stack web application using HTML, CSS, and JavaScript, focused on delivering a seamless user experience. Integrated AWS services such as S3 (scalable storage) and Lambda (serverless backend logic), with deployment pipelines managed through AWS CodePipeline and Terraform for Infrastructure as Code. Built and deployed RESTful APIs with secure, low-latency delivery using AWS API Gateway and CloudFront. Implemented user authentication using AWS Cognito and OAuth protocols, ensuring data privacy and access control.</p>
+          <p><strong>Key Achievements:</strong></p>
+          <ul class="list-disc pl-5">
+            <li>Successfully deployed a scalable, production-ready full-stack application on AWS.</li>
+            <li>Improved application performance while maintaining cost-effective cloud infrastructure.</li>
+            <li>Enhanced security by integrating industry-standard authentication protocols.</li>
+          </ul>
+          <p class="mt-2"><strong>Skills Gained:</strong> Full-stack development, AWS (S3, Lambda, CodePipeline), Terraform, RESTful APIs, AWS Cognito, OAuth, CI/CD, performance optimization</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications Section -->
+  <section id="certifications" class="py-12 section-bg">
+    <div class="container mx-auto px-4">
+      <div class="gradient-border">
+        <h2 class="text-3xl font-semibold pb-2 mb-6 animate-fade-in">Certifications</h2>
+      </div>
+      <div class="space-y-6">
+        <div class="certification p-6 rounded-lg">
+          <i class="fa fa-certificate mr-2" aria-hidden="true"></i><strong>AWS Certified Solutions Architect - Associate</strong>, Amazon Web Services
+          <p class="mt-2"><strong>Skills Gained:</strong> Cloud architecture, AWS service integration, scalability, cost optimization, security best practices</p>
+        </div>
+        <div class="certification p-6 rounded-lg">
+          <i class="fa fa-certificate mr-2" aria-hidden="true"></i><strong>Microsoft Certified: Azure Fundamentals</strong>, Microsoft
+          <p class="mt-2"><strong>Skills Gained:</strong> Azure cloud fundamentals, service deployment, cloud security, resource management</p>
+        </div>
+        <div class="certification p-6 rounded-lg">
+          <i class="fa fa-certificate mr-2" aria-hidden="true"></i><strong>Microsoft Azure AI Fundamentals</strong>, Microsoft
+          <p class="mt-2"><strong>Skills Gained:</strong> AI concepts, Azure AI services, machine learning basics</p>
+        </div>
+        <div class="certification p-6 rounded-lg">
+          <i class="fa fa-certificate mr-2" aria-hidden="true"></i><strong>Oracle Cloud Infrastructure Foundations Associate</strong>, Oracle
+          <p class="mt-2"><strong>Skills Gained:</strong> Oracle Cloud basics, infrastructure management, cloud deployment</p>
+        </div>
+        <div class="certification p-6 rounded-lg">
+          <i class="fa fa-certificate mr-2" aria-hidden="true"></i><strong>Full-Stack Web Development with React</strong>, The Hong Kong University of Science and Technology (Coursera)
+          <p class="mt-2"><strong>Skills Gained:</strong> React development, full-stack architecture, front-end design, API integration</p>
+        </div>
+        <div class="certification p-6 rounded-lg">
+          <i class="fa fa-certificate mr-2" aria-hidden="true"></i><strong>Blockchain</strong>, University at Buffalo, The State University of New York (Coursera)
+          <p class="mt-2"><strong>Skills Gained:</strong> Blockchain fundamentals, smart contracts, decentralized applications</p>
+        </div>
+        <div class="certification p-6 rounded-lg">
+          <i class="fa fa-certificate mr-2" aria-hidden="true"></i><strong>Search Engine Optimization (SEO)</strong>, University of California, Davis (Coursera)
+          <p class="mt-2"><strong>Skills Gained:</strong> SEO strategies, keyword optimization, website visibility</p>
+        </div>
+        <div class="certification p-6 rounded-lg">
+          <i class="fa fa-certificate mr-2" aria-hidden="true"></i><strong>Software Development Lifecycle</strong>, University of Minnesota (Coursera)
+          <p class="mt-2"><strong>Skills Gained:</strong> SDLC methodologies, Agile practices, project management</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Publications Section -->
+  <section id="publications" class="py-12 section-bg">
+    <div class="container mx-auto px-4">
+      <div class="gradient-border">
+        <h2 class="text-3xl font-semibold pb-2 mb-6 animate-fade-in">Publications</h2>
+      </div>
+      <div class="space-y-6">
+        <div class="publication p-6 rounded-lg">
+          <strong>Detect, React: Ransomware Detection and Mitigation System</strong>, ResearchGate
+          <p>Simulated ransomware attacks using hybrid encryption (Fernet + RSA) and demonstrated real-time detection with Python’s Watchdog library.</p>
+        </div>
+        <div class="publication p-6 rounded-lg">
+          <strong>Old Errors, New Threats: The Ongoing Impact of IP Spoofing</strong>, ResearchGate
+          <p>Analyzed IP spoofing techniques and proposed mitigation strategies for modern network security.</p>
+        </div>
+        <div class="publication p-6 rounded-lg">
+          <strong>Closing the Gap Between Directed Hopsets and Shortcut Sets</strong>, ResearchGate
+          <p>Optimized hopset size and hop count in directed graphs for efficient network algorithms.</p>
+        </div>
+        <div class="publication p-6 rounded-lg">
+          <strong>Energy Consumption Visualization by Industry</strong>, ResearchGate
+          <p>Designed interactive visualizations to analyze industrial energy usage for sustainability.</p>
+        </div>
+        <div class="publication p-6 rounded-lg">
+          <a href="https://www.researchgate.net/profile/Guru-Abhay-Magapu/research" target="_blank" class="text-blue-600 hover:underline" aria-label="View All Publications on ResearchGate">View All Publications</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resume Section -->
+  <section id="resume" class="py-12 section-bg">
+    <div class="container mx-auto px-4 text-center">
+      <div class="gradient-border">
+        <h2 class="text-3xl font-semibold pb-2 mb-6 animate-fade-in">Resume</h2>
+      </div>
+      <p class="text-lg mb-4 animate-fade-in">Download my detailed resume to explore my full professional journey.</p>
+      <a href="https://drive.google.com/file/d/1zHUPoD35w_MWg7NV6Rl8v3S0nLHLj4os/view?usp=sharing" class="inline-block gradient-btn text-white resume-btn rounded-lg animate-fade-in delay-100" target="_blank" aria-label="Download Resume">Download Resume (PDF)</a>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-12 section-bg">
+    <div class="container mx-auto px-4 text-center">
+      <div class="gradient-border">
+        <h2 class="text-3xl font-semibold pb-2 mb-6 animate-fade-in">Contact</h2>
+      </div>
+      <div class="space-y-4">
+        <div><i class="fa fa-envelope mr-2" aria-label="Email"></i> guruabhaymagapu@my.unt.edu</div>
+        <div><i class="fa fa-phone mr-2" aria-label="Phone"></i> +1 940-843-6924</div>
+        <div><i class="fab fa-linkedin mr-2" aria-label="LinkedIn"></i> <a href="https://www.linkedin.com/in/guruabhay-magapu/" target="_blank" class="text-blue-600 hover:underline" aria-label="LinkedIn Profile">LinkedIn</a></div>
+        <div><i class="fab fa-github mr-2" aria-label="GitHub"></i> <a href="https://github.com/guruabhay" target="_blank" class="text-blue-600 hover:underline" aria-label="GitHub Profile">GitHub</a></div>
+        <div><i class="fa fa-globe mr-2" aria-label="Portfolio"></i> <a href="https://guruabhaymagapu.github.io/guru-portfolio/" class="text-blue-600 hover:underline" aria-label="Portfolio Website">Portfolio</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="section-bg text-white py-4">
+    <div class="container mx-auto px-4 text-center">
+      <p>© 2019-2025 Guru Abhay Magapu | All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript for Animations, Dark Mode, Scroll Progress, and Hamburger Menu -->
+  <script>
+    // Debounce function to limit scroll event frequency
+    function debounce(func, wait) {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
+    }
+
+    // GSAP Animations (limited to section headers and key elements)
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.utils.toArray("h2.animate-fade-in, .profile-img, .gradient-btn, .about p").forEach((el, i) => {
+      gsap.from(el, {
+        opacity: 0,
+        y: 20,
+        duration: 0.8,
+        delay: i * 0.1,
+        scrollTrigger: {
+          trigger: el,
+          start: "top 90%",
+          toggleActions: "play none none reverse",
+        },
+      });
+    });
+
+    // Dark Mode Toggle
+    const toggleBtn = document.getElementById('theme-toggle');
+    toggleBtn.addEventListener('click', () => {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      toggleBtn.innerHTML = `<i class="fa fa-${isDark ? 'moon' : 'sun'}"></i>`;
+    });
+
+    // Scroll Progress Bar (debounced)
+    const updateScrollProgress = debounce(() => {
+      const winScroll = document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.querySelector('.scroll-progress').style.width = scrolled + '%';
+    }, 50);
+    window.addEventListener('scroll', updateScrollProgress);
+
+    // Scroll-to-Top Button
+    let scrollTopBtn = null;
+    const updateScrollTopBtn = debounce(() => {
+      if (window.scrollY > 300) {
+        if (!scrollTopBtn) {
+          scrollTopBtn = document.createElement('button');
+          scrollTopBtn.innerHTML = '<i class="fa fa-arrow-up"></i>';
+          scrollTopBtn.className = 'fixed bottom-4 right-4 bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700';
+          scrollTopBtn.setAttribute('aria-label', 'Scroll to Top');
+          scrollTopBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+          document.body.appendChild(scrollTopBtn);
+        }
+      } else if (scrollTopBtn) {
+        scrollTopBtn.remove();
+        scrollTopBtn = null;
+      }
+    }, 50);
+    window.addEventListener('scroll', updateScrollTopBtn);
+
+    // Hamburger Menu
+    const hamburger = document.querySelector('.hamburger-menu');
+    const navLinks = document.querySelector('.nav-links');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      hamburger.innerHTML = navLinks.classList.contains('active') ? '<i class="fa fa-times"></i>' : '<i class="fa fa-bars"></i>';
+    });
+  </script>
 </body>
 </html>
