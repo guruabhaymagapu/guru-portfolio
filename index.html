@@ -5,294 +5,164 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Guru Abhay Magapu | SOC Analyst</title>
-
-<meta name="description"
-content="Guru Abhay Magapu – SOC Analyst portfolio showcasing SIEM monitoring, Splunk log analysis, networking labs and cybersecurity projects.">
+<title>Cybersecurity SOC Portfolio</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<link rel="stylesheet"
-href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-
 <style>
 
-/* MATRIX CANVAS */
-
-#matrix{
-position:fixed;
-top:0;
-left:0;
-z-index:-1;
-opacity:0.08;
+body{
+background:#020617;
+color:#00ff9c;
+font-family:monospace;
 }
 
-/* CYBER GRID */
-
-.section-bg{
-background:
-linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-background-size:40px 40px;
+.section{
+padding:90px 20px;
 }
-
-/* HERO */
-
-.bg-hero{
-background:
-linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.4)),
-url("https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1600&q=80")
-center/cover no-repeat;
-}
-
-/* CARDS */
 
 .card{
-background:#111827;
+background:#0f172a;
+border:1px solid #00ff9c33;
+padding:20px;
+border-radius:8px;
 transition:0.3s;
 }
 
 .card:hover{
-transform:translateY(-6px) scale(1.02);
+transform:scale(1.02);
+border-color:#00ff9c;
 }
 
-/* THREAT FEED */
-
-#logs{
-background:#020617;
-border:1px solid #0f172a;
-}
-
-/* BOOT SCREEN */
-
-#bootScreen{
+.navbar{
 position:fixed;
 top:0;
-left:0;
+width:100%;
+background:#020617;
+border-bottom:1px solid #00ff9c33;
+z-index:1000;
+}
+
+.terminal{
+position:fixed;
 width:100%;
 height:100%;
 background:black;
-color:#00ff9c;
 display:flex;
 align-items:center;
 justify-content:center;
-font-family:monospace;
+flex-direction:column;
 z-index:9999;
+font-size:18px;
 }
 
-#bootText{
-white-space:pre-line;
-}
-
-#attackMap{
-height:400px;
-border-radius:10px;
+.logbox{
+background:black;
+height:260px;
+overflow:hidden;
+padding:10px;
+border:1px solid #00ff9c33;
 }
 
 </style>
-
 </head>
 
-<body class="bg-black text-gray-200">
+<body>
 
-<canvas id="matrix"></canvas>
+<!-- TERMINAL INTRO -->
 
-<!-- BOOT SCREEN -->
+<div id="terminal" class="terminal">
 
-<div id="bootScreen">
-<pre id="bootText"></pre>
-</div>
-
-<!-- HERO -->
-
-<section class="bg-hero h-screen flex items-center justify-center text-center">
-
-<div>
-
-<h1 class="text-5xl font-bold mb-4">
-Guru Abhay Magapu
-</h1>
-
-<p class="text-xl text-gray-300 mb-6">
-SOC Analyst | SIEM (Splunk) | Threat Detection | Log Analysis
-</p>
-
-<a href="#projects"
-class="bg-blue-600 px-6 py-3 rounded-lg hover:bg-blue-700 transition">
-View Projects
-</a>
+<p>Initializing SOC Environment...</p>
+<p>Loading Threat Intelligence...</p>
+<p>Starting Security Monitoring...</p>
+<p>Connecting SIEM Engine...</p>
+<p>Access Granted.</p>
 
 </div>
 
-</section>
+<script>
+setTimeout(()=>{
+document.getElementById("terminal").style.display="none"
+},5000)
+</script>
+
+<!-- NAVBAR -->
+
+<div class="navbar p-4 flex gap-6 justify-center text-sm">
+
+<a href="#about">About</a>
+<a href="#skills">Skills</a>
+<a href="#toolkit">Toolkit</a>
+<a href="#certifications">Certifications</a>
+<a href="#projects">Projects</a>
+<a href="#dashboard">SOC Dashboard</a>
+<a href="#attackmap">Attack Map</a>
+<a href="#siem">SIEM Logs</a>
+<a href="#contact">Contact</a>
+
+</div>
+
+<div class="pt-20"></div>
 
 <!-- ABOUT -->
 
-<section class="py-16 section-bg">
+<section id="about" class="section max-w-4xl mx-auto">
 
-<div class="max-w-5xl mx-auto px-6 text-center">
+<h2 class="text-3xl mb-6">About Me</h2>
 
-<h2 class="text-3xl font-semibold mb-6">
-About Me
-</h2>
-
-<p class="text-gray-400">
-
-Cybersecurity graduate with hands-on SOC labs, SIEM monitoring,
-and network security experience across AWS and Azure environments.
-
+<p>
+Aspiring Cybersecurity Analyst with hands-on experience in
+SIEM monitoring, networking labs, and security automation.
+Focused on SOC operations, threat detection, and incident response.
 </p>
 
-</div>
-
 </section>
 
-<!-- SOC DASHBOARD -->
+<!-- SKILLS -->
 
-<section class="py-16">
+<section id="skills" class="section max-w-4xl mx-auto">
 
-<div class="max-w-6xl mx-auto px-6">
+<h2 class="text-3xl mb-6">Security Skills</h2>
 
-<h2 class="text-3xl font-semibold text-center mb-10">
-SOC Monitoring Dashboard
-</h2>
+<div class="grid md:grid-cols-3 gap-4">
 
-<div class="grid md:grid-cols-4 gap-6 text-center">
-
-<div class="card p-6 rounded-lg">
-<p>Logs Analyzed</p>
-<h3 id="logsCount" class="text-3xl text-green-400">0</h3>
+<div class="card cursor-pointer" onclick="toggle('s1')">
+SIEM Log Analysis
+<div id="s1" class="hidden mt-3 text-sm">
+Used in Splunk project for log monitoring and threat detection.
+</div>
 </div>
 
-<div class="card p-6 rounded-lg">
-<p>Threat Alerts</p>
-<h3 id="alertsCount" class="text-3xl text-red-400">0</h3>
+<div class="card cursor-pointer" onclick="toggle('s2')">
+Network Security
+<div id="s2" class="hidden mt-3 text-sm">
+Configured VLANs, routing and packet inspection.
+</div>
 </div>
 
-<div class="card p-6 rounded-lg">
-<p>Investigations</p>
-<h3 id="investigationCount" class="text-3xl text-yellow-400">0</h3>
+<div class="card cursor-pointer" onclick="toggle('s3')">
+Python Security Automation
+<div id="s3" class="hidden mt-3 text-sm">
+Developed ransomware behavior detection prototype.
 </div>
-
-<div class="card p-6 rounded-lg">
-<p>Security Tools</p>
-<h3 class="text-3xl text-blue-400">Splunk</h3>
-</div>
-
 </div>
 
 </div>
 
 </section>
 
-<!-- THREAT FEED -->
+<!-- TOOLKIT -->
 
-<section class="py-16 section-bg">
+<section id="toolkit" class="section max-w-4xl mx-auto">
 
-<div class="max-w-4xl mx-auto px-6">
+<h2 class="text-3xl mb-6">Security Toolkit</h2>
 
-<h2 class="text-3xl font-semibold mb-8 text-center">
-Threat Intelligence Feed
-</h2>
+<div class="grid md:grid-cols-3 gap-4">
 
-<div id="logs"
-class="p-6 rounded-lg font-mono text-green-400 text-sm space-y-2">
-
-<p>[INFO] Splunk query executed</p>
-<p>[WARNING] Suspicious login detected</p>
-<p>[ALERT] Possible brute force attempt</p>
-<p>[INFO] DNS anomaly detected</p>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ATTACK MAP -->
-
-<section class="py-16">
-
-<div class="max-w-5xl mx-auto px-6">
-
-<h2 class="text-3xl font-semibold text-center mb-10">
-Global Cyber Attack Map
-</h2>
-
-<div id="attackMap"></div>
-
-</div>
-
-</section>
-
-<!-- PROJECTS -->
-
-<section id="projects" class="py-16 section-bg">
-
-<div class="max-w-6xl mx-auto px-6">
-
-<h2 class="text-3xl font-semibold mb-10 text-center">
-Projects
-</h2>
-
-<div class="grid md:grid-cols-3 gap-8">
-
-<div class="card p-6 rounded-lg">
-
-<h3 class="font-semibold mb-2">
-Splunk SIEM Log Analysis
-</h3>
-
-<p class="text-sm text-gray-400">
-Analyzed Windows logs using SPL queries to detect suspicious login patterns.
-</p>
-
-</div>
-
-<div class="card p-6 rounded-lg">
-
-<h3 class="font-semibold mb-2">
-SOC Networking Lab
-</h3>
-
-<p class="text-sm text-gray-400">
-Configured VLANs, subnetting and routing using Cisco Packet Tracer.
-</p>
-
-</div>
-
-<div class="card p-6 rounded-lg">
-
-<h3 class="font-semibold mb-2">
-Ransomware Detection System
-</h3>
-
-<p class="text-sm text-gray-400">
-Python system monitoring abnormal encryption activity.
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- GITHUB -->
-
-<section class="py-16">
-
-<div class="text-center">
-
-<h2 class="text-3xl font-semibold mb-8">
-GitHub Activity
-</h2>
-
-<img src="https://github-readme-stats.vercel.app/api?username=guruabhaymagapu&show_icons=true&theme=dark">
+<div class="card">Splunk</div>
+<div class="card">Wireshark</div>
+<div class="card">Cisco Packet Tracer</div>
 
 </div>
 
@@ -300,211 +170,213 @@ GitHub Activity
 
 <!-- CERTIFICATIONS -->
 
-<section class="py-16 section-bg">
+<section id="certifications" class="section max-w-4xl mx-auto">
 
-<div class="text-center">
+<h2 class="text-3xl mb-6">Certifications</h2>
 
-<h2 class="text-3xl font-semibold mb-8">
-Certifications
-</h2>
+<div class="space-y-3">
 
-<div class="space-y-4 text-gray-300">
-
-<p>Splunk Fundamentals – SIEM & Log Analysis (2026)</p>
-<p>Networking Basics – Cisco (2026)</p>
-<p>AWS Certified Solutions Architect – Associate (2022)</p>
-<p>Microsoft Azure Fundamentals AZ-900 (2023)</p>
+<div class="card">AWS Certified Solutions Architect – Associate</div>
+<div class="card">Microsoft Azure Fundamentals (AZ-900)</div>
+<div class="card">Cisco Networking Basics</div>
+<div class="card">Splunk Fundamentals (SIEM & Log Analysis)</div>
 
 </div>
 
+</section>
+
+<!-- PROJECTS -->
+
+<section id="projects" class="section max-w-5xl mx-auto">
+
+<h2 class="text-3xl mb-6">Projects</h2>
+
+<div class="grid md:grid-cols-3 gap-6">
+
+<div class="card">
+<h3 class="text-xl mb-2">SIEM Log Analysis</h3>
+<p>Splunk dashboards and threat detection.</p>
+<a href="https://github.com/guruabhaymagapu/cybersecurity/tree/main/soc-labs/siem-splunk" target="_blank">View Project</a>
 </div>
+
+<div class="card">
+<h3 class="text-xl mb-2">SOC Networking Lab</h3>
+<p>Cisco Packet Tracer networking SOC lab.</p>
+<a href="https://github.com/guruabhaymagapu/cybersecurity/tree/main/soc-labs/networking" target="_blank">View Project</a>
+</div>
+
+<div class="card">
+<h3 class="text-xl mb-2">Ransomware Detection System</h3>
+<p>Python file monitoring prototype.</p>
+<a href="https://github.com/guruabhaymagapu/Ransomware-Detection-System" target="_blank">View Project</a>
+</div>
+
+</div>
+
+<div class="text-center mt-10">
+
+<a href="https://github.com/guruabhaymagapu" target="_blank"
+class="bg-green-400 text-black px-6 py-3 rounded">
+
+More Projects
+
+</a>
+
+</div>
+
+</section>
+
+<!-- SOC DASHBOARD -->
+
+<section id="dashboard" class="section max-w-5xl mx-auto">
+
+<h2 class="text-3xl mb-6">SOC Monitoring Dashboard</h2>
+
+<div class="grid md:grid-cols-4 gap-4 text-center">
+
+<div class="card">
+Threat Alerts
+<h3 id="alerts" class="text-3xl">0</h3>
+</div>
+
+<div class="card">
+Blocked IPs
+<h3 id="ips" class="text-3xl">0</h3>
+</div>
+
+<div class="card">
+Malware Events
+<h3 id="malware" class="text-3xl">0</h3>
+</div>
+
+<div class="card">
+Suspicious Logins
+<h3 id="logins" class="text-3xl">0</h3>
+</div>
+
+</div>
+
+</section>
+
+<script>
+
+setInterval(()=>{
+
+document.getElementById("alerts").innerText=Math.floor(Math.random()*50)
+document.getElementById("ips").innerText=Math.floor(Math.random()*100)
+document.getElementById("malware").innerText=Math.floor(Math.random()*20)
+document.getElementById("logins").innerText=Math.floor(Math.random()*10)
+
+},2000)
+
+</script>
+
+<!-- ATTACK MAP -->
+
+<section id="attackmap" class="section max-w-5xl mx-auto">
+
+<h2 class="text-3xl mb-6">Global Cyber Attack Map</h2>
+
+<canvas id="map" width="800" height="400"></canvas>
+
+</section>
+
+<script>
+
+const canvas=document.getElementById("map")
+const ctx=canvas.getContext("2d")
+
+function draw(){
+
+ctx.clearRect(0,0,800,400)
+
+for(let i=0;i<12;i++){
+
+ctx.beginPath()
+ctx.moveTo(Math.random()*800,Math.random()*400)
+ctx.lineTo(Math.random()*800,Math.random()*400)
+ctx.strokeStyle="#00ff9c"
+ctx.stroke()
+
+}
+
+}
+
+setInterval(draw,1200)
+
+</script>
+
+<!-- SIEM LOG VIEWER -->
+
+<section id="siem" class="section max-w-4xl mx-auto">
+
+<h2 class="text-3xl mb-6">Live SIEM Log Viewer</h2>
+
+<div class="logbox" id="logs"></div>
+
+</section>
+
+<script>
+
+const logTypes=[
+"[INFO] User login success",
+"[WARN] Suspicious DNS request",
+"[ALERT] Possible brute force attack",
+"[INFO] Firewall rule applied",
+"[CRITICAL] Malware signature detected"
+]
+
+function addLog(){
+
+const box=document.getElementById("logs")
+
+let log=document.createElement("div")
+
+log.textContent=new Date().toLocaleTimeString()+" "+logTypes[Math.floor(Math.random()*logTypes.length)]
+
+box.prepend(log)
+
+if(box.children.length>12) box.removeChild(box.lastChild)
+
+}
+
+setInterval(addLog,1200)
+
+</script>
+
+<!-- GITHUB ACTIVITY -->
+
+<section class="section text-center">
+
+<h2 class="text-3xl mb-6">GitHub Activity</h2>
+
+<img src="https://ghchart.rshah.org/guruabhaymagapu"
+class="mx-auto border border-green-500 rounded-lg">
 
 </section>
 
 <!-- CONTACT -->
 
-<section class="py-16">
+<section id="contact" class="section text-center">
 
-<div class="text-center">
+<h2 class="text-3xl mb-6">Contact</h2>
 
-<h2 class="text-3xl font-semibold mb-4">
-Contact
-</h2>
+<div class="space-x-6">
 
-<p class="text-gray-400 mb-6">
-Open to SOC Analyst opportunities
-</p>
+<a href="https://github.com/guruabhaymagapu">GitHub</a>
 
-<div class="space-x-6 text-xl">
+<a href="https://www.linkedin.com/in/guruabhay-magapu">LinkedIn</a>
 
-<a href="https://github.com/guruabhaymagapu">
-<i class="fab fa-github"></i>
-</a>
-
-<a href="https://linkedin.com/in/guruabhay-magapu">
-<i class="fab fa-linkedin"></i>
-</a>
-
-<a href="mailto:guruabhaymagapu@gmail.com">
-<i class="fa fa-envelope"></i>
-</a>
-
-</div>
+<a href="mailto:guruabhaymagapu@gmail.com">Email</a>
 
 </div>
 
 </section>
 
-<footer class="text-center py-6 text-gray-500 text-sm">
-© 2026 Guru Abhay Magapu
-</footer>
-
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
 <script>
-
-/* BOOT SCREEN */
-
-const bootLines=[
-"Initializing SOC Environment...",
-"Loading Threat Intelligence...",
-"Connecting to Splunk SIEM...",
-"Checking Network Sensors...",
-"Access Granted...",
-"Launching Security Dashboard..."
-]
-
-let i=0
-let text=""
-
-function boot(){
-
-if(i<bootLines.length){
-
-text+=bootLines[i]+"\n"
-document.getElementById("bootText").innerText=text
-i++
-
-setTimeout(boot,500)
-
-}else{
-
-setTimeout(()=>{
-document.getElementById("bootScreen").style.display="none"
-},1000)
-
+function toggle(id){
+document.getElementById(id).classList.toggle("hidden")
 }
-
-}
-
-window.onload=boot
-
-/* SOC METRICS */
-
-let logs=0
-let alerts=0
-let investigations=0
-
-setInterval(()=>{
-
-logs+=Math.floor(Math.random()*40)
-
-if(Math.random()>0.7) alerts++
-if(Math.random()>0.8) investigations++
-
-document.getElementById("logsCount").innerText=logs
-document.getElementById("alertsCount").innerText=alerts
-document.getElementById("investigationCount").innerText=investigations
-
-},2000)
-
-/* THREAT FEED */
-
-setInterval(()=>{
-
-const feed=document.getElementById("logs")
-
-const events=[
-"[INFO] Log correlation completed",
-"[ALERT] Suspicious outbound traffic",
-"[WARNING] Multiple login failures",
-"[INFO] Packet inspection triggered"
-]
-
-const newLog=document.createElement("p")
-
-newLog.textContent=events[Math.floor(Math.random()*events.length)]
-
-feed.prepend(newLog)
-
-if(feed.children.length>6)
-feed.removeChild(feed.lastChild)
-
-},4000)
-
-/* ATTACK MAP */
-
-const map=L.map('attackMap').setView([20,0],2)
-
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map)
-
-function randomAttack(){
-
-const lat=(Math.random()*140)-70
-const lon=(Math.random()*360)-180
-
-const marker=L.circleMarker([lat,lon],{
-radius:6,
-color:'red'
-}).addTo(map)
-
-setTimeout(()=>map.removeLayer(marker),4000)
-
-}
-
-setInterval(randomAttack,1500)
-
-/* MATRIX */
-
-const canvas=document.getElementById("matrix")
-const ctx=canvas.getContext("2d")
-
-canvas.height=window.innerHeight
-canvas.width=window.innerWidth
-
-const letters="01SOCSECURITY"
-const fontSize=14
-const columns=canvas.width/fontSize
-
-const drops=[]
-
-for(let x=0;x<columns;x++) drops[x]=1
-
-function draw(){
-
-ctx.fillStyle="rgba(0,0,0,0.05)"
-ctx.fillRect(0,0,canvas.width,canvas.height)
-
-ctx.fillStyle="#0f0"
-ctx.font=fontSize+"px monospace"
-
-for(let i=0;i<drops.length;i++){
-
-const text=letters[Math.floor(Math.random()*letters.length)]
-
-ctx.fillText(text,i*fontSize,drops[i]*fontSize)
-
-if(drops[i]*fontSize>canvas.height&&Math.random()>0.975)
-drops[i]=0
-
-drops[i]++
-
-}
-
-}
-
-setInterval(draw,33)
-
 </script>
 
 </body>
