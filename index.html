@@ -6,9 +6,44 @@
 <title>Guru Abhay Magapu | SOC Analyst</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-/* GLOBAL STYLES */
-body { background:#020617; color:#00ff9c; font-family:monospace; margin:0; }
-.section { padding:90px 20px; }
+/* ---------------- Body / Matrix Background ---------------- */
+body {
+    margin:0;
+    font-family: monospace;
+    background:black;
+    color:#00ff9c;
+    overflow-x:hidden;
+}
+#matrix {
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:-1;
+}
+
+/* ---------------- Navbar ---------------- */
+.navbar {
+    position: fixed;
+    top:0;
+    width:100%;
+    background:#020617;
+    border-bottom:1px solid #00ff9c33;
+    z-index:1000;
+    padding:1rem;
+    display:flex;
+    justify-content:center;
+    gap:1.5rem;
+    font-size:0.875rem;
+}
+.navbar a { color:#00ff9c; transition:0.2s; }
+.navbar a:hover { color:#0ff; }
+
+/* ---------------- Section ---------------- */
+.section {
+    padding:80px 20px;
+}
 .card {
     background:#0f172a;
     border:1px solid #00ff9c33;
@@ -16,147 +51,112 @@ body { background:#020617; color:#00ff9c; font-family:monospace; margin:0; }
     border-radius:8px;
     transition:0.3s;
 }
-.card:hover { transform:scale(1.03); border-color:#00ff9c; }
-.navbar {
-    position:fixed;
-    top:0;
-    width:100%;
-    background:#020617;
-    border-bottom:1px solid #00ff9c33;
-    z-index:1000;
-}
-.logbox {
-    background:#111827;
-    height:260px;
-    overflow:hidden;
-    padding:10px;
-    border:1px solid #00ff9c33;
-    font-family:monospace;
-    font-size:14px;
-    position:relative;
-}
+.card:hover { transform:scale(1.02); border-color:#00ff9c; }
 
-/* HERO */
-.hero-section { display:flex; flex-wrap:wrap; max-width:6xl; margin:auto; align-items:center; gap:20px; }
-.hero-photo { width:192px; height:192px; object-fit:cover; border-radius:8px; border:2px solid #00ff9c; }
-.hero-text h1 { font-size:3rem; font-weight:bold; margin-bottom:0.5rem; }
-.hero-text h2 { color:#00ff9c; margin-bottom:1rem; }
-
-/* MATRIX BACKGROUND FOR INTRO */
-#matrix-canvas {
-    position:fixed;
-    top:0;
-    left:0;
+/* ---------------- Terminal Intro ---------------- */
+#terminal {
+    position: fixed;
     width:100%;
     height:100%;
-    z-index:9998;
     background:black;
-}
-
-/* TERMINAL */
-.terminal {
-    position:fixed;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.95);
     display:flex;
-    align-items:center;
-    justify-content:center;
     flex-direction:column;
+    justify-content:center;
+    align-items:center;
     z-index:9999;
     font-size:18px;
     color:#00ff9c;
 }
-
-/* PROJECT LINK BUTTON */
-.project-btn {
+.terminal-line {
+    display:flex;
+}
+.cursor {
+    display:inline-block;
+    width:10px;
     background:#00ff9c;
-    color:#000;
-    padding:0.75rem 1.5rem;
-    border-radius:6px;
-    text-decoration:none;
-    font-weight:bold;
+    margin-left:2px;
+    animation: blink 1s infinite;
+}
+@keyframes blink { 0%,50%,100% { opacity:1 } 25%,75% { opacity:0 } }
+
+/* ---------------- Hero ---------------- */
+#hero { display:flex; flex-direction:column; gap:1.5rem; align-items:center; max-width:6xl; margin:auto; }
+#hero-content { display:flex; flex-direction:column; gap:1rem; }
+#hero-photo { width:180px; height:180px; object-cover; border:2px solid #00ff9c; border-radius:12px; }
+
+/* ---------------- Live SOC Feed ---------------- */
+#live-feed {
+    background:#111827;
+    padding:20px;
+    border:1px solid #00ff9c33;
+    height:300px;
+    overflow:hidden;
+}
+.log-entry { margin-bottom:5px; font-family:monospace; font-size:0.875rem; }
+.log-info { color:#0f0; }
+.log-warn { color:#ff0; }
+.log-alert { color:#f00; }
+.log-critical { color:#a0f; }
+
+/* ---------------- Dashboard Metrics ---------------- */
+.metric {
+    text-align:center;
+    padding:20px;
+    border:1px solid #00ff9c33;
+    border-radius:8px;
     transition:0.3s;
 }
-.project-btn:hover { background:#00cc7a; }
+.metric:hover { transform:scale(1.05); border-color:#00ff9c; }
+.progress-bar {
+    height:6px;
+    background:#00ff9c33;
+    border-radius:3px;
+    margin-top:6px;
+}
+.progress-fill {
+    height:100%;
+    background:#00ff9c;
+    width:0%;
+    border-radius:3px;
+    transition:0.5s;
+}
 
-/* FOOTER */
-footer { text-align:center; padding:20px; color:#555; font-size:0.875rem; }
-
-/* LIVE SOC FEED COLORS */
-.log-entry { padding:2px 0; }
-.log-info { color:#00ff9c; }
-.log-warn { color:#ffff00; }
-.log-alert { color:#ff5555; animation:blink 1s infinite; }
-@keyframes blink { 0%,50%,100% { opacity:1; } 25%,75% { opacity:0.3; } }
-.log-background { position:absolute; width:100%; height:100%; top:0; left:0; z-index:-1; }
+/* ---------------- Footer ---------------- */
+footer { text-align:center; padding:20px; font-size:0.875rem; color:#888; }
 </style>
 </head>
 <body>
 
-<!-- MATRIX & TERMINAL INTRO -->
-<canvas id="matrix-canvas"></canvas>
-<div id="terminal" class="terminal">
-    <p>Initializing SOC Environment...</p>
-    <p>Loading Threat Intelligence...</p>
-    <p>Starting Security Monitoring...</p>
-    <p>Connecting SIEM Engine...</p>
-    <p>Access Granted.</p>
-</div>
-<script>
-// MATRIX ANIMATION
-const canvas=document.getElementById("matrix-canvas");
-const ctx=canvas.getContext("2d");
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-const letters="01SOCSECURITY";
-const fontSize=14;
-const columns=canvas.width/fontSize;
-const drops=[];
-for(let i=0;i<columns;i++) drops[i]=1;
-function drawMatrix(){
-    ctx.fillStyle="rgba(0,0,0,0.05)";
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle="#0f0";
-    ctx.font=fontSize+"px monospace";
-    for(let i=0;i<drops.length;i++){
-        const text=letters[Math.floor(Math.random()*letters.length)];
-        ctx.fillText(text,i*fontSize,drops[i]*fontSize);
-        if(drops[i]*fontSize>canvas.height && Math.random()>0.975) drops[i]=0;
-        drops[i]++;
-    }
-}
-const matrixInterval=setInterval(drawMatrix,33);
-// TERMINAL HIDE AFTER 5 SECONDS
-setTimeout(()=>{
-    document.getElementById("terminal").style.display="none";
-    canvas.style.display="none";
-    clearInterval(matrixInterval);
-},5000);
-</script>
+<!-- MATRIX BACKGROUND -->
+<canvas id="matrix"></canvas>
+
+<!-- TERMINAL INTRO -->
+<div id="terminal"></div>
 
 <!-- NAVBAR -->
-<div class="navbar p-4 flex gap-6 justify-center text-sm">
-<a href="#about">About</a>
-<a href="#skills">Skills</a>
-<a href="#toolkit">Toolkit</a>
-<a href="#certifications">Certifications</a>
-<a href="#projects">Projects</a>
-<a href="#dashboard">SOC Dashboard</a>
-<a href="#livefeed">Live Feed</a>
-<a href="#contact">Contact</a>
+<div class="navbar">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#toolkit">Toolkit</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#projects">Projects</a>
+    <a href="#dashboard">SOC Dashboard</a>
+    <a href="#live-feed-section">Live Feed</a>
+    <a href="#contact">Contact</a>
 </div>
+
 <div class="pt-20"></div>
 
 <!-- HERO -->
-<section class="section hero-section">
-    <img src="IMG-20250614-WA0003.jpg" alt="Guru Abhay Magapu" class="hero-photo">
-    <div class="hero-text">
-        <h1>Guru Abhay Magapu</h1>
-        <h2>SOC Analyst (L1) | SIEM (Splunk) | Security Monitoring | Log Analysis | Incident Detection | Network Security | AWS & Azure Certified</h2>
-        <p>
-            Aspiring Cybersecurity Analyst with hands-on experience in SIEM monitoring, networking labs, and security automation.
-            Focused on SOC operations, threat detection, and incident response.
+<section id="hero" class="section max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-8">
+    <img id="hero-photo" src="profile.jpg" alt="Guru Abhay Magapu">
+    <div id="hero-content">
+        <h1 class="text-5xl font-bold text-center md:text-left">Guru Abhay Magapu</h1>
+        <h2 class="text-xl text-green-400 text-center md:text-left">
+        SOC Analyst (L1) | SIEM (Splunk) | Security Monitoring | Log Analysis | Incident Detection | Network Security | AWS & Azure Certified
+        </h2>
+        <p class="text-gray-300 text-center md:text-left">
+            Aspiring Cybersecurity Analyst with hands-on experience in SIEM monitoring, networking labs, and security automation. Focused on SOC operations, threat detection, and incident response.
         </p>
     </div>
 </section>
@@ -222,56 +222,34 @@ setTimeout(()=>{
     </div>
 </div>
 <div class="text-center mt-10">
-<a href="https://github.com/guruabhaymagapu" target="_blank" class="project-btn">More Projects</a>
+<a href="https://github.com/guruabhaymagapu" target="_blank" class="bg-green-400 text-black px-6 py-3 rounded">More Projects</a>
 </div>
 </section>
 
 <!-- SOC DASHBOARD -->
 <section id="dashboard" class="section max-w-5xl mx-auto">
 <h2 class="text-3xl mb-6">SOC Monitoring Dashboard</h2>
-<div class="grid md:grid-cols-4 gap-4 text-center">
-    <div class="card">Threat Alerts <h3 id="alerts" class="text-3xl">0</h3></div>
-    <div class="card">Blocked IPs <h3 id="ips" class="text-3xl">0</h3></div>
-    <div class="card">Malware Events <h3 id="malware" class="text-3xl">0</h3></div>
-    <div class="card">Suspicious Logins <h3 id="logins" class="text-3xl">0</h3></div>
+<div class="grid md:grid-cols-4 gap-4">
+    <div class="metric">Threat Alerts <h3 id="alerts" class="text-3xl">0</h3>
+        <div class="progress-bar"><div id="alerts-bar" class="progress-fill"></div></div>
+    </div>
+    <div class="metric">Blocked IPs <h3 id="ips" class="text-3xl">0</h3>
+        <div class="progress-bar"><div id="ips-bar" class="progress-fill"></div></div>
+    </div>
+    <div class="metric">Malware Events <h3 id="malware" class="text-3xl">0</h3>
+        <div class="progress-bar"><div id="malware-bar" class="progress-fill"></div></div>
+    </div>
+    <div class="metric">Suspicious Logins <h3 id="logins" class="text-3xl">0</h3>
+        <div class="progress-bar"><div id="logins-bar" class="progress-fill"></div></div>
+    </div>
 </div>
 </section>
-<script>
-setInterval(()=>{
-    document.getElementById("alerts").innerText=Math.floor(Math.random()*50)
-    document.getElementById("ips").innerText=Math.floor(Math.random()*100)
-    document.getElementById("malware").innerText=Math.floor(Math.random()*20)
-    document.getElementById("logins").innerText=Math.floor(Math.random()*10)
-},2000)
-</script>
 
 <!-- LIVE SOC FEED -->
-<section id="livefeed" class="section max-w-4xl mx-auto relative">
-<h2 class="text-3xl mb-6">Live SOC Event Feed</h2>
-<div class="logbox" id="live-logs"></div>
+<section id="live-feed-section" class="section max-w-4xl mx-auto">
+<h2 class="text-3xl mb-6">Live SOC / SIEM Feed</h2>
+<div id="live-feed"></div>
 </section>
-<script>
-const liveEvents=[
-{msg:"[INFO] User login success", type:"info"},
-{msg:"[WARN] Suspicious DNS request", type:"warn"},
-{msg:"[ALERT] Possible brute force attack", type:"alert"},
-{msg:"[INFO] Firewall rule applied", type:"info"},
-{msg:"[CRITICAL] Malware signature detected", type:"alert"},
-{msg:"[INFO] VPN connected", type:"info"},
-{msg:"[ALERT] Unauthorized USB device detected", type:"alert"},
-{msg:"[WARN] Multiple failed SSH attempts", type:"warn"},
-];
-function addLiveLog(){
-    const box=document.getElementById("live-logs");
-    const log=document.createElement("div");
-    const event=liveEvents[Math.floor(Math.random()*liveEvents.length)];
-    log.className="log-entry log-"+event.type;
-    log.textContent=new Date().toLocaleTimeString()+" "+event.msg;
-    box.prepend(log);
-    if(box.children.length>12) box.removeChild(box.lastChild);
-}
-setInterval(addLiveLog,1200);
-</script>
 
 <!-- GITHUB ACTIVITY -->
 <section class="section text-center">
@@ -289,15 +267,106 @@ setInterval(addLiveLog,1200);
 </div>
 </section>
 
-<!-- COPYRIGHT -->
 <footer>
 © 2026 Guru Abhay Magapu | All rights reserved
 </footer>
 
 <script>
+// ---------------- Toggle Skills ----------------
 function toggle(id){document.getElementById(id).classList.toggle("hidden")}
+
+// ---------------- Matrix Animation ----------------
+const matrix = document.getElementById("matrix");
+const ctx = matrix.getContext("2d");
+matrix.width = window.innerWidth;
+matrix.height = window.innerHeight;
+const letters = "01SOCSECURITY";
+const fontSize = 14;
+const columns = matrix.width / fontSize;
+const drops = Array.from({length: columns},()=>1);
+function drawMatrix(){
+    ctx.fillStyle="rgba(0,0,0,0.05)";
+    ctx.fillRect(0,0,matrix.width,matrix.height);
+    ctx.fillStyle="#0f0";
+    ctx.font=fontSize+"px monospace";
+    for(let i=0;i<drops.length;i++){
+        const text=letters[Math.floor(Math.random()*letters.length)];
+        ctx.fillText(text,i*fontSize,drops[i]*fontSize);
+        if(drops[i]*fontSize>matrix.height && Math.random()>0.975) drops[i]=0;
+        drops[i]++;
+    }
+}
+setInterval(drawMatrix,33);
+
+// ---------------- Terminal Intro ----------------
+const terminalLines = [
+    "Initializing SOC Environment...",
+    "Loading Threat Intelligence...",
+    "Starting Security Monitoring...",
+    "Connecting SIEM Engine...",
+    "Access Granted."
+];
+const terminal = document.getElementById("terminal");
+let lineIndex = 0;
+function typeLine(){
+    if(lineIndex>=terminalLines.length){
+        setTimeout(()=>{terminal.style.display="none"},500);
+        return;
+    }
+    const line = document.createElement("div");
+    line.classList.add("terminal-line");
+    terminal.appendChild(line);
+    let charIndex=0;
+    const cursor = document.createElement("span"); cursor.classList.add("cursor"); line.appendChild(cursor);
+    function typeChar(){
+        if(charIndex<terminalLines[lineIndex].length){
+            line.textContent+=terminalLines[lineIndex][charIndex];
+            line.appendChild(cursor);
+            charIndex++;
+            setTimeout(typeChar,80);
+        } else {
+            lineIndex++;
+            setTimeout(typeLine,800);
+        }
+    }
+    typeChar();
+}
+typeLine();
+
+// ---------------- Dashboard Metrics Animation ----------------
+function animateMetric(id,barId,maxVal){
+    const el = document.getElementById(id);
+    const bar = document.getElementById(barId);
+    setInterval(()=>{
+        const val = Math.floor(Math.random()*maxVal);
+        el.innerText=val;
+        bar.style.width = (val/maxVal*100)+"%";
+    },2000);
+}
+animateMetric("alerts","alerts-bar",50);
+animateMetric("ips","ips-bar",100);
+animateMetric("malware","malware-bar",20);
+animateMetric("logins","logins-bar",10);
+
+// ---------------- Live SOC Feed ----------------
+const logTypes=[
+    {msg:"[INFO] User login success",class:"log-info"},
+    {msg:"[WARN] Suspicious DNS request",class:"log-warn"},
+    {msg:"[ALERT] Possible brute force attack",class:"log-alert"},
+    {msg:"[INFO] Firewall rule applied",class:"log-info"},
+    {msg:"[CRITICAL] Malware signature detected",class:"log-critical"}
+];
+const feed = document.getElementById("live-feed");
+function addFeedLog(){
+    const log = document.createElement("div");
+    const l = logTypes[Math.floor(Math.random()*logTypes.length)];
+    log.textContent = new Date().toLocaleTimeString()+" "+l.msg;
+    log.className="log-entry "+l.class;
+    feed.prepend(log);
+    if(feed.children.length>15) feed.removeChild(feed.lastChild);
+}
+setInterval(addFeedLog,1200);
 </script>
 
 </body>
 </html>
-
