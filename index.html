@@ -12,7 +12,7 @@
 <style>
 
 body{
-background:#020617;
+background:#0a0f0d;
 color:#00ff9c;
 font-family:monospace;
 }
@@ -27,6 +27,7 @@ border:1px solid #00ff9c33;
 padding:20px;
 border-radius:8px;
 transition:0.3s;
+box-shadow:0 0 10px rgba(0,255,156,0.15);
 }
 
 .card:hover{
@@ -99,6 +100,7 @@ document.getElementById("terminal").style.display="none"
 <a href="#dashboard">SOC Dashboard</a>
 <a href="#attackmap">Attack Map</a>
 <a href="#siem">SIEM Logs</a>
+<a href="#threat">Threat Feed</a>
 <a href="#contact">Contact</a>
 
 </div>
@@ -277,7 +279,9 @@ document.getElementById("logins").innerText=Math.floor(Math.random()*10)
 
 <h2 class="text-3xl mb-6">Global Cyber Attack Map</h2>
 
-<canvas id="map" width="800" height="400"></canvas>
+<canvas id="map" width="900" height="450"
+style="background:url('https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg') center/contain no-repeat; border:1px solid #00ff9c33;">
+</canvas>
 
 </section>
 
@@ -286,23 +290,33 @@ document.getElementById("logins").innerText=Math.floor(Math.random()*10)
 const canvas=document.getElementById("map")
 const ctx=canvas.getContext("2d")
 
-function draw(){
+function drawAttack(){
 
-ctx.clearRect(0,0,800,400)
+ctx.clearRect(0,0,900,450)
 
-for(let i=0;i<12;i++){
+for(let i=0;i<8;i++){
+
+let x1=Math.random()*900
+let y1=Math.random()*450
+let x2=Math.random()*900
+let y2=Math.random()*450
 
 ctx.beginPath()
-ctx.moveTo(Math.random()*800,Math.random()*400)
-ctx.lineTo(Math.random()*800,Math.random()*400)
+ctx.moveTo(x1,y1)
+ctx.lineTo(x2,y2)
 ctx.strokeStyle="#00ff9c"
 ctx.stroke()
 
-}
+ctx.beginPath()
+ctx.arc(x2,y2,3,0,Math.PI*2)
+ctx.fillStyle="#00ff9c"
+ctx.fill()
 
 }
 
-setInterval(draw,1200)
+}
+
+setInterval(drawAttack,1200)
 
 </script>
 
@@ -341,6 +355,40 @@ if(box.children.length>12) box.removeChild(box.lastChild)
 }
 
 setInterval(addLog,1200)
+
+</script>
+
+<!-- THREAT FEED -->
+
+<section id="threat" class="section max-w-4xl mx-auto">
+
+<h2 class="text-3xl mb-6">Threat Intelligence Feed</h2>
+
+<ul id="feed"></ul>
+
+</section>
+
+<script>
+
+fetch("https://api.rss2json.com/v1/api.json?rss_url=https://feeds.feedburner.com/TheHackersNews")
+
+.then(res=>res.json())
+
+.then(data=>{
+
+const feed=document.getElementById("feed")
+
+data.items.slice(0,5).forEach(item=>{
+
+let li=document.createElement("li")
+
+li.innerHTML=`<a href="${item.link}" target="_blank">${item.title}</a>`
+
+feed.appendChild(li)
+
+})
+
+})
 
 </script>
 
