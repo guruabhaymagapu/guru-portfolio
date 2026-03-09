@@ -3,85 +3,193 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Guru Abhay Magapu | SOC Analyst</title>
-<script src="https://cdn.tailwindcss.com"></script>
+
+<title>Guru Abhay Magapu | Cybersecurity Portfolio</title>
 
 <style>
 
 body{
-background:#020617;
-color:#00ff9c;
-font-family:monospace;
 margin:0;
-overflow-x:hidden;
+font-family:Arial,Helvetica,sans-serif;
+background:#050505;
+color:white;
 }
 
-.section{
-padding:90px 20px;
-max-width:1100px;
-margin:auto;
-}
-
-.card{
-background:#0f172a;
-border:1px solid #00ff9c33;
-padding:20px;
-border-radius:8px;
-transition:0.3s;
-}
-
-.card:hover{
-transform:scale(1.03);
-border-color:#00ff9c;
-}
-
-.matrix-bg{
-position:fixed;
-top:0;
-left:0;
-z-index:-1;
-opacity:0.03;
-}
-
-.logbox{
-background:black;
-height:260px;
-overflow:hidden;
-padding:10px;
-border:1px solid #00ff9c33;
-font-size:14px;
-}
+/* NAVBAR */
 
 .navbar{
-position:fixed;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 30px;
+background:#000;
+position:sticky;
 top:0;
-width:100%;
-background:#020617;
-border-bottom:1px solid #00ff9c33;
 z-index:1000;
 }
 
-#terminal{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:black;
+.nav-links{
 display:flex;
-align-items:center;
-justify-content:center;
-flex-direction:column;
-z-index:2000;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.nav-links a{
+color:white;
+text-decoration:none;
+font-size:15px;
+}
+
+.nav-links a:hover{
+color:#00ff9c;
+}
+
+/* TERMINAL */
+
+#terminal{
+background:#000;
+padding:40px;
+font-family:monospace;
+color:#00ff9c;
+white-space:pre-line;
 font-size:18px;
+min-height:120px;
 }
 
 .cursor{
+display:inline-block;
+width:10px;
 animation:blink 1s infinite;
 }
 
 @keyframes blink{
-50%{opacity:0;}
+0%{opacity:1}
+50%{opacity:0}
+100%{opacity:1}
+}
+
+/* HERO */
+
+.hero{
+text-align:center;
+padding:80px 20px;
+}
+
+.hero h1{
+font-size:40px;
+margin-bottom:10px;
+}
+
+.hero p{
+font-size:18px;
+opacity:0.8;
+}
+
+/* SECTION */
+
+section{
+padding:60px 40px;
+}
+
+h2{
+font-size:28px;
+margin-bottom:30px;
+color:#00ff9c;
+}
+
+/* CARDS */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+}
+
+.card{
+background:#0a0a0a;
+padding:25px;
+border-radius:10px;
+border:1px solid #00ff9c22;
+}
+
+/* PUBLICATIONS */
+
+.publication-title{
+font-size:22px;
+font-weight:700;
+margin-bottom:8px;
+color:#00ff9c;
+}
+
+.publication-meta{
+font-size:14px;
+opacity:.7;
+margin-bottom:10px;
+}
+
+.publication-desc{
+font-size:16px;
+line-height:1.5;
+}
+
+.publication-link{
+display:inline-block;
+margin-top:10px;
+color:#00f7ff;
+text-decoration:none;
+}
+
+.view-more{
+margin-top:30px;
+display:inline-block;
+padding:12px 22px;
+border:1px solid #00ff9c;
+border-radius:6px;
+text-decoration:none;
+color:#00ff9c;
+}
+
+/* SOC DASHBOARD */
+
+.soc-card{
+background:#0a0a0a;
+border:1px solid #00ff9c33;
+padding:25px;
+border-radius:10px;
+text-align:center;
+}
+
+.soc-title{
+font-size:20px;
+font-weight:700;
+margin-bottom:10px;
+color:#00ff9c;
+}
+
+.soc-value{
+font-size:40px;
+font-weight:800;
+}
+
+/* THREAT FEED */
+
+.feed{
+background:#000;
+padding:20px;
+font-family:monospace;
+height:200px;
+overflow:hidden;
+border-radius:10px;
+}
+
+/* CANVAS */
+
+canvas{
+width:100%;
+height:350px;
+background:#050505;
+border:1px solid #00ff9c22;
+border-radius:10px;
 }
 
 </style>
@@ -89,392 +197,340 @@ animation:blink 1s infinite;
 
 <body>
 
-<!-- MATRIX BACKGROUND -->
-<canvas id="matrix" class="matrix-bg"></canvas>
+<!-- NAVBAR -->
 
-<script>
-const canvas=document.getElementById("matrix");
-const ctx=canvas.getContext("2d");
+<div class="navbar">
 
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
+<div><b>Guru Abhay</b></div>
 
-const letters="01SOCSECURITY";
-const fontSize=14;
-const columns=canvas.width/fontSize;
-const drops=[];
+<div class="nav-links">
+<a href="#projects">Projects</a>
+<a href="#publications">Publications</a>
+<a href="#dashboard">SOC Dashboard</a>
+<a href="#contact">Contact</a>
+</div>
 
-for(let i=0;i<columns;i++){drops[i]=1;}
+</div>
 
-function draw(){
-ctx.fillStyle="rgba(0,0,0,0.05)";
-ctx.fillRect(0,0,canvas.width,canvas.height);
-ctx.fillStyle="#00ff9c";
-ctx.font=fontSize+"px monospace";
-
-for(let i=0;i<drops.length;i++){
-const text=letters[Math.floor(Math.random()*letters.length)];
-ctx.fillText(text,i*fontSize,drops[i]*fontSize);
-
-if(drops[i]*fontSize>canvas.height && Math.random()>0.975){
-drops[i]=0;
-}
-drops[i]++;
-}
-}
-
-setInterval(draw,33);
-</script>
 
 <!-- TERMINAL INTRO -->
 
-<div id="terminal">
-<div id="terminalText"></div>
+<div id="terminal"></div>
+
+
+<!-- HERO -->
+
+<div class="hero">
+
+<h1>Guru Abhay Magapu</h1>
+
+<p>Cybersecurity Researcher | SOC Analyst | Threat Detection</p>
+
 </div>
+
+
+<!-- PROJECTS -->
+
+<section id="projects">
+
+<h2>Projects</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Ransomware Detection System</h3>
+<p>Python based ransomware detection and mitigation using hybrid encryption.</p>
+</div>
+
+<div class="card">
+<h3>IP Spoofing Security Analysis</h3>
+<p>Security research exploring vulnerabilities in TCP/IP infrastructure.</p>
+</div>
+
+<div class="card">
+<h3>Future SOC Simulation</h3>
+<p>Simulation of SOC monitoring and network traffic analysis.</p>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PUBLICATIONS -->
+
+<section id="publications">
+
+<h2>Publications</h2>
+
+<div class="grid">
+
+<div class="card">
+
+<h3 class="publication-title">
+Detect, React: Ransomware Detection and Mitigation System – A Simulated Implementation
+</h3>
+
+<p class="publication-meta">
+ResearchGate | University of North Texas · May 5, 2025
+</p>
+
+<p class="publication-desc">
+Simulated ransomware attack and mitigation system using hybrid encryption and file monitoring.
+</p>
+
+<a class="publication-link"
+href="https://www.researchgate.net/publication/391400165_Detect_React_Recover_A_Hands-On_Ransomware_Defense_System"
+target="_blank">Show Publication →</a>
+
+</div>
+
+<div class="card">
+
+<h3 class="publication-title">
+Old Errors, New Threats: The Ongoing Impact of IP Spoofing
+</h3>
+
+<p class="publication-meta">
+ResearchGate | University of North Texas · Apr 16, 2025
+</p>
+
+<p class="publication-desc">
+Analysis of IP spoofing vulnerabilities impacting modern infrastructure and recent CVEs.
+</p>
+
+<a class="publication-link"
+href="https://www.researchgate.net/publication/391280137_Old_Errors_New_Threats_The_Ongoing_Impact_of_IP_Spoofing_in_Modern_Infrastructure"
+target="_blank">Show Publication →</a>
+
+</div>
+
+<div class="card">
+
+<h3 class="publication-title">
+Reconfigurable Intelligent Surfaces for 6G and Beyond Communication
+</h3>
+
+<p class="publication-meta">
+ResearchGate | University of North Texas · Jul 24, 2024
+</p>
+
+<p class="publication-desc">
+Exploring RIS beamforming techniques to improve spectral efficiency and coverage in 6G networks.
+</p>
+
+<a class="publication-link"
+href="https://www.researchgate.net/publication/389712533_Reconfigurable_intelligent_surfaces_for_6G_and_Beyond_communication"
+target="_blank">Show Publication →</a>
+
+</div>
+
+</div>
+
+<br>
+
+<a class="view-more"
+href="https://www.researchgate.net/"
+target="_blank">
+View More Publications
+</a>
+
+</section>
+
+
+<!-- SOC DASHBOARD -->
+
+<section id="dashboard">
+
+<h2>SOC Dashboard</h2>
+
+<div class="grid">
+
+<div class="soc-card">
+<div class="soc-title">Threat Alerts</div>
+<div class="soc-value" id="threats">0</div>
+</div>
+
+<div class="soc-card">
+<div class="soc-title">Blocked IPs</div>
+<div class="soc-value" id="ips">0</div>
+</div>
+
+<div class="soc-card">
+<div class="soc-title">Malware Events</div>
+<div class="soc-value" id="malware">0</div>
+</div>
+
+<div class="soc-card">
+<div class="soc-title">Suspicious Logins</div>
+<div class="soc-value" id="logins">0</div>
+</div>
+
+</div>
+
+</section>
+
+
+<!-- THREAT FEED -->
+
+<section>
+
+<h2>Live Threat Feed</h2>
+
+<div class="feed" id="feed"></div>
+
+</section>
+
+
+<!-- FUTURE SOC SIMULATION -->
+
+<section>
+
+<h2>Future SOC Simulation</h2>
+
+<canvas id="networkCanvas"></canvas>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+<h2>Contact</h2>
+
+<p>Email: your@email.com</p>
+
+</section>
+
+
 
 <script>
 
-document.addEventListener("DOMContentLoaded",function(){
+/* TERMINAL */
+
+const terminal=document.getElementById("terminal")
 
 const messages=[
 "Initializing SOC Environment...",
 "Loading Threat Intelligence...",
 "Starting Security Monitoring...",
-"Connecting SIEM Engine...",
-"Access Granted."
-];
+"Welcome to Guru Abhay Magapu Portfolio"
+]
 
-const terminal=document.getElementById("terminalText");
+let m=0
+let c=0
 
-let i=0;
+function type(){
 
-function showMessage(){
+if(c<messages[m].length){
 
-if(i>=messages.length){
-setTimeout(()=>{
-document.getElementById("terminal").style.display="none";
-},1000);
-return;
+terminal.innerHTML+=messages[m][c]
+c++
+
+setTimeout(type,40)
+
+}else{
+
+terminal.innerHTML+="\n"
+m++
+c=0
+
+if(m<messages.length){
+setTimeout(type,800)
 }
-
-let line=document.createElement("div");
-
-line.textContent=messages[i];
-
-let cursor=document.createElement("span");
-cursor.textContent=" |";
-cursor.className="cursor";
-
-line.appendChild(cursor);
-terminal.appendChild(line);
-
-setTimeout(()=>{
-cursor.remove();
-i++;
-setTimeout(showMessage,1000);
-},2000);
 
 }
 
-showMessage();
-
-});
-
-</script>
-
-<!-- NAVBAR -->
-
-<div class="navbar p-4">
-
-<div class="flex justify-between items-center max-w-6xl mx-auto">
-
-<div class="text-lg font-bold">SOC Portfolio</div>
-
-<button id="menuBtn" class="md:hidden">☰</button>
-
-<div id="menu" class="hidden md:flex gap-6 text-sm">
-
-<a href="#skills">Skills</a>
-<a href="#toolkit">Toolkit</a>
-<a href="#certifications">Certifications</a>
-<a href="#projects">Projects</a>
-<a href="#publications">Publications</a>
-<a href="#dashboard">Dashboard</a>
-<a href="#livefeed">Live Feed</a>
-<a href="#contact">Contact</a>
-
-</div>
-
-</div>
-
-<div id="mobileMenu" class="hidden flex flex-col gap-4 p-4 md:hidden">
-
-<a href="#skills">Skills</a>
-<a href="#toolkit">Toolkit</a>
-<a href="#certifications">Certifications</a>
-<a href="#projects">Projects</a>
-<a href="#publications">Publications</a>
-<a href="#dashboard">Dashboard</a>
-<a href="#livefeed">Live Feed</a>
-<a href="#contact">Contact</a>
-
-</div>
-
-</div>
-
-<script>
-document.getElementById("menuBtn").onclick=function(){
-document.getElementById("mobileMenu").classList.toggle("hidden");
 }
-</script>
 
-<div class="pt-20"></div>
+window.onload=type
 
-<!-- HERO -->
 
-<section class="section text-center">
 
-<h1 class="text-5xl font-bold mb-2">Guru Abhay Magapu</h1>
+/* SOC COUNTERS */
 
-<h2 class="text-xl text-green-400 mb-6">
+setInterval(()=>{
+document.getElementById("threats").innerText=Math.floor(Math.random()*200)
+document.getElementById("ips").innerText=Math.floor(Math.random()*500)
+document.getElementById("malware").innerText=Math.floor(Math.random()*50)
+document.getElementById("logins").innerText=Math.floor(Math.random()*40)
+},2000)
 
-SOC Analyst (L1) | SIEM (Splunk) | Security Monitoring | Log Analysis |
-Incident Detection | Network Security | AWS & Azure Certified
 
-</h2>
 
-<div class="flex flex-col md:flex-row items-center gap-6 justify-center">
+/* THREAT FEED */
 
-<img src="profile.jpg" class="w-48 h-48 rounded-lg border-2 border-green-500">
+const feed=document.getElementById("feed")
 
-<p class="max-w-xl text-left text-gray-300">
-
-Aspiring Cybersecurity Analyst focused on SOC operations,
-SIEM monitoring, threat detection, incident investigation,
-and cloud security.
-
-Hands-on experience with Splunk SIEM, networking labs,
-Python security automation, and threat analysis.
-
-</p>
-
-</div>
-
-</section>
-
-<!-- SKILLS -->
-
-<section id="skills" class="section">
-
-<h2 class="text-3xl mb-6">Security Skills</h2>
-
-<div class="grid md:grid-cols-3 gap-4">
-
-<div class="card">SIEM Log Analysis</div>
-<div class="card">Incident Detection</div>
-<div class="card">Network Security</div>
-<div class="card">Security Monitoring</div>
-<div class="card">Threat Investigation</div>
-<div class="card">Python Security Automation</div>
-
-</div>
-
-</section>
-
-<!-- TOOLKIT -->
-
-<section id="toolkit" class="section">
-
-<h2 class="text-3xl mb-6">Security Toolkit</h2>
-
-<div class="grid md:grid-cols-3 gap-4">
-
-<div class="card">Splunk</div>
-<div class="card">Wireshark</div>
-<div class="card">Cisco Packet Tracer</div>
-
-</div>
-
-</section>
-
-<!-- CERTIFICATIONS -->
-
-<section id="certifications" class="section">
-
-<h2 class="text-3xl mb-6">Certifications</h2>
-
-<div class="space-y-3">
-
-<div class="card">AWS Certified Solutions Architect – Associate</div>
-<div class="card">Microsoft Azure Fundamentals (AZ-900)</div>
-<div class="card">Networking Basics – Cisco</div>
-<div class="card">Splunk Fundamentals</div>
-
-</div>
-
-</section>
-
-<!-- PROJECTS -->
-
-<section id="projects" class="section">
-
-<h2 class="text-3xl mb-6">Projects</h2>
-
-<div class="grid md:grid-cols-3 gap-6">
-
-<div class="card">
-<h3 class="text-xl mb-2">SIEM Log Analysis</h3>
-<p>Splunk dashboards and threat detection.</p>
-<a href="https://github.com/guruabhaymagapu">View Project</a>
-</div>
-
-<div class="card">
-<h3 class="text-xl mb-2">SOC Networking Lab</h3>
-<p>Cisco Packet Tracer SOC lab.</p>
-<a href="https://github.com/guruabhaymagapu">View Project</a>
-</div>
-
-<div class="card">
-<h3 class="text-xl mb-2">Ransomware Detection System</h3>
-<p>Python ransomware behavior monitoring.</p>
-<a href="https://github.com/guruabhaymagapu">View Project</a>
-</div>
-
-</div>
-
-</section>
-
-<!-- PUBLICATIONS -->
-
-<section id="publications" class="section">
-
-<h2 class="text-3xl mb-6">Publications</h2>
-
-<div class="grid md:grid-cols-3 gap-6">
-
-<div class="card">
-<h3 class="font-bold">Detect, React: Ransomware Detection System</h3>
-<p>ResearchGate · May 5, 2025</p>
-<a href="https://www.researchgate.net/publication/391400165_Detect_React_Recover_A_Hands-On_Ransomware_Defense_System" target="_blank">Show Publication</a>
-</div>
-
-<div class="card">
-<h3 class="font-bold">Old Errors, New Threats: IP Spoofing</h3>
-<p>ResearchGate · Apr 16, 2025</p>
-<a href="https://www.researchgate.net/publication/391280137_Old_Errors_New_Threats_The_Ongoing_Impact_of_IP_Spoofing_in_Modern_Infrastructure" target="_blank">Show Publication</a>
-</div>
-
-<div class="card">
-<h3 class="font-bold">Reconfigurable Intelligent Surfaces for 6G</h3>
-<p>ResearchGate · Jul 24, 2024</p>
-<a href="https://www.researchgate.net/publication/389712533_Reconfigurable_intelligent_surfaces_for_6G_and_Beyond_communication" target="_blank">Show Publication</a>
-</div>
-
-</div>
-
-<div class="text-center mt-10">
-
-<a href="https://www.researchgate.net/" class="bg-green-400 text-black px-6 py-3 rounded">
-
-View More Publications
-
-</a>
-
-</div>
-
-</section>
-
-<!-- SOC DASHBOARD -->
-
-<section id="dashboard" class="section">
-
-<h2 class="text-3xl mb-6">SOC Dashboard</h2>
-
-<div class="grid md:grid-cols-4 gap-4 text-center">
-
-<div class="card">Threat Alerts <h3 id="alerts">0</h3></div>
-<div class="card">Blocked IPs <h3 id="ips">0</h3></div>
-<div class="card">Malware Events <h3 id="malware">0</h3></div>
-<div class="card">Suspicious Logins <h3 id="logins">0</h3></div>
-
-</div>
-
-</section>
-
-<script>
+const logs=[
+"[INFO] User login successful",
+"[WARNING] Suspicious DNS query",
+"[ALERT] SSH brute force attempt",
+"[CRITICAL] Malware signature detected"
+]
 
 setInterval(()=>{
 
-document.getElementById("alerts").innerText=Math.floor(Math.random()*50);
-document.getElementById("ips").innerText=Math.floor(Math.random()*100);
-document.getElementById("malware").innerText=Math.floor(Math.random()*20);
-document.getElementById("logins").innerText=Math.floor(Math.random()*10);
+let log=document.createElement("div")
+log.textContent=new Date().toLocaleTimeString()+" "+logs[Math.floor(Math.random()*logs.length)]
 
-},2000);
+feed.prepend(log)
 
-</script>
+if(feed.children.length>8){
+feed.removeChild(feed.lastChild)
+}
 
-<!-- LIVE SOC FEED -->
+},1200)
 
-<section id="livefeed" class="section">
 
-<h2 class="text-3xl mb-6">Live SOC Feed</h2>
 
-<div class="logbox" id="logs"></div>
+/* NETWORK SIMULATION */
 
-</section>
+const canvas=document.getElementById("networkCanvas")
+const ctx=canvas.getContext("2d")
 
-<script>
+canvas.width=canvas.offsetWidth
+canvas.height=350
 
-const logs=[
-"[INFO] User login success",
-"[WARN] Suspicious DNS request",
-"[ALERT] Possible brute force attack",
-"[CRITICAL] Malware signature detected"
-];
+let packets=[]
 
-function addLog(){
+function createPacket(){
 
-const box=document.getElementById("logs");
-
-const msg=logs[Math.floor(Math.random()*logs.length)];
-
-const log=document.createElement("div");
-
-log.textContent=new Date().toLocaleTimeString()+" "+msg;
-
-if(msg.includes("INFO"))log.style.color="#00ff9c";
-if(msg.includes("WARN"))log.style.color="yellow";
-if(msg.includes("ALERT"))log.style.color="orange";
-if(msg.includes("CRITICAL"))log.style.color="red";
-
-box.prepend(log);
-
-if(box.children.length>12)box.removeChild(box.lastChild);
+packets.push({
+x:0,
+y:Math.random()*canvas.height,
+speed:2+Math.random()*3
+})
 
 }
 
-setInterval(addLog,1200);
+setInterval(createPacket,800)
+
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+packets.forEach(p=>{
+
+p.x+=p.speed
+
+ctx.beginPath()
+ctx.arc(p.x,p.y,3,0,Math.PI*2)
+ctx.fillStyle="#00ff9c"
+ctx.fill()
+
+})
+
+packets=packets.filter(p=>p.x<canvas.width)
+
+requestAnimationFrame(animate)
+
+}
+
+animate()
 
 </script>
-
-<!-- CONTACT -->
-
-<section id="contact" class="section text-center">
-
-<h2 class="text-3xl mb-6">Contact</h2>
-
-<a href="https://github.com/guruabhaymagapu">GitHub</a> |
-<a href="https://www.linkedin.com/">LinkedIn</a> |
-<a href="mailto:your@email.com">Email</a>
-
-</section>
-
-<footer class="text-center py-6 text-gray-500">
-
-© 2026 Guru Abhay Magapu | All rights reserved
-
-</footer>
 
 </body>
 </html>
