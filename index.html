@@ -28,11 +28,13 @@ border:1px solid #00ff9c33;
 padding:20px;
 border-radius:8px;
 transition:0.3s;
+box-shadow:0 0 8px #00ff9c22;
 }
 
 .card:hover{
 transform:scale(1.03);
 border-color:#00ff9c;
+box-shadow:0 0 18px #00ff9c66;
 }
 
 .matrix-bg{
@@ -90,6 +92,7 @@ animation:blink 1s infinite;
 <body>
 
 <!-- MATRIX BACKGROUND -->
+
 <canvas id="matrix" class="matrix-bg"></canvas>
 
 <script>
@@ -129,7 +132,7 @@ setInterval(draw,33);
 <!-- TERMINAL INTRO -->
 
 <div id="terminal">
-<div id="terminalText"></div>
+<pre id="terminalText"></pre>
 </div>
 
 <script>
@@ -146,37 +149,46 @@ const messages=[
 
 const terminal=document.getElementById("terminalText");
 
-let i=0;
+let line=0;
+let char=0;
 
-function showMessage(){
+function type(){
 
-if(i>=messages.length){
+if(line>=messages.length){
 setTimeout(()=>{
 document.getElementById("terminal").style.display="none";
 },1000);
 return;
 }
 
-let line=document.createElement("div");
+if(char < messages[line].length){
 
-line.textContent=messages[i];
+terminal.innerHTML += messages[line][char];
+char++;
 
-let cursor=document.createElement("span");
-cursor.textContent=" |";
-cursor.className="cursor";
+setTimeout(type,40);
 
-line.appendChild(cursor);
-terminal.appendChild(line);
+}else{
+
+terminal.innerHTML += '<span class="cursor">|</span>';
 
 setTimeout(()=>{
-cursor.remove();
-i++;
-setTimeout(showMessage,1000);
-},2000);
+
+terminal.innerHTML = terminal.innerHTML.replace("|","");
+terminal.innerHTML += "\n";
+
+line++;
+char=0;
+
+setTimeout(type,400);
+
+},600);
 
 }
 
-showMessage();
+}
+
+type();
 
 });
 
@@ -190,7 +202,7 @@ showMessage();
 
 <div class="text-lg font-bold">SOC Portfolio</div>
 
-<button id="menuBtn" class="md:hidden">☰</button>
+<button id="menuBtn" class="md:hidden text-xl">☰</button>
 
 <div id="menu" class="hidden md:flex gap-6 text-sm">
 
@@ -353,19 +365,19 @@ Python security automation, and threat analysis.
 <div class="grid md:grid-cols-3 gap-6">
 
 <div class="card">
-<h3 class="font-bold">Detect, React: Ransomware Detection System</h3>
+<h3 class="text-xl font-bold mb-2">Detect, React: Ransomware Detection System</h3>
 <p>ResearchGate · May 5, 2025</p>
 <a href="https://www.researchgate.net/publication/391400165_Detect_React_Recover_A_Hands-On_Ransomware_Defense_System" target="_blank">Show Publication</a>
 </div>
 
 <div class="card">
-<h3 class="font-bold">Old Errors, New Threats: IP Spoofing</h3>
+<h3 class="text-xl font-bold mb-2">Old Errors, New Threats: IP Spoofing</h3>
 <p>ResearchGate · Apr 16, 2025</p>
 <a href="https://www.researchgate.net/publication/391280137_Old_Errors_New_Threats_The_Ongoing_Impact_of_IP_Spoofing_in_Modern_Infrastructure" target="_blank">Show Publication</a>
 </div>
 
 <div class="card">
-<h3 class="font-bold">Reconfigurable Intelligent Surfaces for 6G</h3>
+<h3 class="text-xl font-bold mb-2">Reconfigurable Intelligent Surfaces for 6G</h3>
 <p>ResearchGate · Jul 24, 2024</p>
 <a href="https://www.researchgate.net/publication/389712533_Reconfigurable_intelligent_surfaces_for_6G_and_Beyond_communication" target="_blank">Show Publication</a>
 </div>
@@ -375,9 +387,7 @@ Python security automation, and threat analysis.
 <div class="text-center mt-10">
 
 <a href="https://www.researchgate.net/" class="bg-green-400 text-black px-6 py-3 rounded">
-
 View More Publications
-
 </a>
 
 </div>
@@ -392,10 +402,10 @@ View More Publications
 
 <div class="grid md:grid-cols-4 gap-4 text-center">
 
-<div class="card">Threat Alerts <h3 id="alerts">0</h3></div>
-<div class="card">Blocked IPs <h3 id="ips">0</h3></div>
-<div class="card">Malware Events <h3 id="malware">0</h3></div>
-<div class="card">Suspicious Logins <h3 id="logins">0</h3></div>
+<div class="card">Threat Alerts <h3 id="alerts" class="text-3xl mt-2">0</h3></div>
+<div class="card">Blocked IPs <h3 id="ips" class="text-3xl mt-2">0</h3></div>
+<div class="card">Malware Events <h3 id="malware" class="text-3xl mt-2">0</h3></div>
+<div class="card">Suspicious Logins <h3 id="logins" class="text-3xl mt-2">0</h3></div>
 
 </div>
 
