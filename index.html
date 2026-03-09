@@ -5,52 +5,88 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Guru Abhay Magapu | SOC Analyst</title>
 <script src="https://cdn.tailwindcss.com"></script>
+
 <style>
-/* GLOBAL */
-body {
-    margin:0;
-    font-family:monospace;
-    color:#00ff9c;
-    background:#020617;
-    overflow-x:hidden;
+
+body{
+background:#020617;
+color:#00ff9c;
+font-family:monospace;
+margin:0;
+overflow-x:hidden;
 }
-.section { padding:90px 20px; }
-.card {
-    background:#0f172a;
-    border:1px solid #00ff9c33;
-    padding:20px;
-    border-radius:8px;
-    transition:0.3s;
+
+.section{
+padding:90px 20px;
+max-width:1100px;
+margin:auto;
 }
-.card:hover { transform:scale(1.02); border-color:#00ff9c; }
-.navbar {
-    position:fixed;
-    top:0;
-    width:100%;
-    background:#020617;
-    border-bottom:1px solid #00ff9c33;
-    z-index:1000;
+
+.card{
+background:#0f172a;
+border:1px solid #00ff9c33;
+padding:20px;
+border-radius:8px;
+transition:0.3s;
 }
-.logbox {
-    background:black;
-    height:260px;
-    overflow:hidden;
-    padding:10px;
-    border:1px solid #00ff9c33;
-    font-size:14px;
+
+.card:hover{
+transform:scale(1.03);
+border-color:#00ff9c;
 }
-.matrix-bg {
-    position:fixed;
-    top:0;
-    left:0;
-    z-index:-1;
-    width:100%;
-    height:100%;
-    opacity:0.07;
+
+.matrix-bg{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
+opacity:0.03;
 }
-.hidden { display:none; }
+
+.logbox{
+background:black;
+height:260px;
+overflow:hidden;
+padding:10px;
+border:1px solid #00ff9c33;
+font-size:14px;
+}
+
+.navbar{
+position:fixed;
+top:0;
+width:100%;
+background:#020617;
+border-bottom:1px solid #00ff9c33;
+z-index:1000;
+}
+
+#terminal{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+z-index:2000;
+font-size:18px;
+}
+
+.cursor{
+animation:blink 1s infinite;
+}
+
+@keyframes blink{
+50%{opacity:0;}
+}
+
 </style>
 </head>
+
 <body>
 
 <!-- MATRIX BACKGROUND -->
@@ -59,255 +95,386 @@ body {
 <script>
 const canvas=document.getElementById("matrix");
 const ctx=canvas.getContext("2d");
+
 canvas.width=window.innerWidth;
 canvas.height=window.innerHeight;
+
 const letters="01SOCSECURITY";
 const fontSize=14;
 const columns=canvas.width/fontSize;
 const drops=[];
-for(let i=0;i<columns;i++) drops[i]=1;
-function drawMatrix(){
-    ctx.fillStyle="rgba(0,0,0,0.05)";
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle="#0f0";
-    ctx.font=fontSize+"px monospace";
-    for(let i=0;i<drops.length;i++){
-        const text=letters[Math.floor(Math.random()*letters.length)];
-        ctx.fillText(text,i*fontSize,drops[i]*fontSize);
-        if(drops[i]*fontSize>canvas.height && Math.random()>0.975) drops[i]=0;
-        drops[i]++;
-    }
+
+for(let i=0;i<columns;i++){drops[i]=1;}
+
+function draw(){
+ctx.fillStyle="rgba(0,0,0,0.05)";
+ctx.fillRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="#00ff9c";
+ctx.font=fontSize+"px monospace";
+
+for(let i=0;i<drops.length;i++){
+const text=letters[Math.floor(Math.random()*letters.length)];
+ctx.fillText(text,i*fontSize,drops[i]*fontSize);
+
+if(drops[i]*fontSize>canvas.height && Math.random()>0.975){
+drops[i]=0;
 }
-setInterval(drawMatrix,33);
+drops[i]++;
+}
+}
+
+setInterval(draw,33);
+</script>
+
+<!-- TERMINAL INTRO -->
+
+<div id="terminal">
+<div id="terminalText"></div>
+</div>
+
+<script>
+
+document.addEventListener("DOMContentLoaded",function(){
+
+const messages=[
+"Initializing SOC Environment...",
+"Loading Threat Intelligence...",
+"Starting Security Monitoring...",
+"Connecting SIEM Engine...",
+"Access Granted."
+];
+
+const terminal=document.getElementById("terminalText");
+
+let i=0;
+
+function showMessage(){
+
+if(i>=messages.length){
+setTimeout(()=>{
+document.getElementById("terminal").style.display="none";
+},1000);
+return;
+}
+
+let line=document.createElement("div");
+
+line.textContent=messages[i];
+
+let cursor=document.createElement("span");
+cursor.textContent=" |";
+cursor.className="cursor";
+
+line.appendChild(cursor);
+terminal.appendChild(line);
+
+setTimeout(()=>{
+cursor.remove();
+i++;
+setTimeout(showMessage,1000);
+},2000);
+
+}
+
+showMessage();
+
+});
+
 </script>
 
 <!-- NAVBAR -->
-<div class="navbar p-4 flex gap-6 justify-center text-sm">
-<a href="#about">About</a>
+
+<div class="navbar p-4">
+
+<div class="flex justify-between items-center max-w-6xl mx-auto">
+
+<div class="text-lg font-bold">SOC Portfolio</div>
+
+<button id="menuBtn" class="md:hidden">☰</button>
+
+<div id="menu" class="hidden md:flex gap-6 text-sm">
+
 <a href="#skills">Skills</a>
 <a href="#toolkit">Toolkit</a>
 <a href="#certifications">Certifications</a>
 <a href="#projects">Projects</a>
-<a href="#dashboard">SOC Dashboard</a>
+<a href="#publications">Publications</a>
+<a href="#dashboard">Dashboard</a>
 <a href="#livefeed">Live Feed</a>
-<a href="#future">Future Improvement</a>
 <a href="#contact">Contact</a>
+
 </div>
+
+</div>
+
+<div id="mobileMenu" class="hidden flex flex-col gap-4 p-4 md:hidden">
+
+<a href="#skills">Skills</a>
+<a href="#toolkit">Toolkit</a>
+<a href="#certifications">Certifications</a>
+<a href="#projects">Projects</a>
+<a href="#publications">Publications</a>
+<a href="#dashboard">Dashboard</a>
+<a href="#livefeed">Live Feed</a>
+<a href="#contact">Contact</a>
+
+</div>
+
+</div>
+
+<script>
+document.getElementById("menuBtn").onclick=function(){
+document.getElementById("mobileMenu").classList.toggle("hidden");
+}
+</script>
+
 <div class="pt-20"></div>
 
 <!-- HERO -->
-<section class="section max-w-6xl mx-auto text-center">
-    <h1 class="text-5xl font-bold mb-2">Guru Abhay Magapu</h1>
-    <h2 class="text-xl text-green-400 mb-6">
-        SOC Analyst (L1) | SIEM (Splunk) | Security Monitoring | Log Analysis | Incident Detection | Network Security | AWS & Azure Certified
-    </h2>
-    <div class="flex flex-col md:flex-row items-center justify-center gap-6">
-        <!-- Profile Photo -->
-        <img src="profile.jpg" alt="Guru Abhay Magapu" class="w-48 h-48 object-cover rounded-lg border-2 border-green-500">
-        <!-- About Me -->
-        <p class="max-w-xl text-left text-gray-300">
-            Aspiring Cybersecurity Analyst with hands-on experience in SIEM monitoring, networking labs, and security automation.
-            Focused on SOC operations, threat detection, and incident response.
-        </p>
-    </div>
+
+<section class="section text-center">
+
+<h1 class="text-5xl font-bold mb-2">Guru Abhay Magapu</h1>
+
+<h2 class="text-xl text-green-400 mb-6">
+
+SOC Analyst (L1) | SIEM (Splunk) | Security Monitoring | Log Analysis |
+Incident Detection | Network Security | AWS & Azure Certified
+
+</h2>
+
+<div class="flex flex-col md:flex-row items-center gap-6 justify-center">
+
+<img src="profile.jpg" class="w-48 h-48 rounded-lg border-2 border-green-500">
+
+<p class="max-w-xl text-left text-gray-300">
+
+Aspiring Cybersecurity Analyst focused on SOC operations,
+SIEM monitoring, threat detection, incident investigation,
+and cloud security.
+
+Hands-on experience with Splunk SIEM, networking labs,
+Python security automation, and threat analysis.
+
+</p>
+
+</div>
+
 </section>
 
-<!-- TERMINAL INTRO -->
-<div id="terminal" class="fixed w-full h-full bg-black flex flex-col items-center justify-center z-50 font-mono text-lg">
-    <p id="terminal-line"></p>
-    <span id="cursor">|</span>
-</div>
-
-<script>
-const terminalMessages=[
-    "Initializing SOC Environment...",
-    "Loading Threat Intelligence...",
-    "Starting Security Monitoring...",
-    "Connecting SIEM Engine...",
-    "Access Granted."
-];
-const lineEl=document.getElementById("terminal-line");
-const cursorEl=document.getElementById("cursor");
-let index=0;
-function showNextMessage(){
-    if(index<terminalMessages.length){
-        lineEl.textContent=terminalMessages[index];
-        cursorEl.style.display="inline";
-        setTimeout(()=>{
-            cursorEl.style.display="none";
-            index++;
-            setTimeout(showNextMessage,1000);
-        },2000);
-    } else {
-        document.getElementById("terminal").style.display="none";
-    }
-}
-showNextMessage();
-</script>
-
 <!-- SKILLS -->
-<section id="skills" class="section max-w-4xl mx-auto">
+
+<section id="skills" class="section">
+
 <h2 class="text-3xl mb-6">Security Skills</h2>
+
 <div class="grid md:grid-cols-3 gap-4">
-    <div class="card cursor-pointer" onclick="toggle('s1')">
-        SIEM Log Analysis
-        <div id="s1" class="hidden mt-3 text-sm">Used in Splunk project for log monitoring and threat detection.</div>
-    </div>
-    <div class="card cursor-pointer" onclick="toggle('s2')">
-        Network Security
-        <div id="s2" class="hidden mt-3 text-sm">Configured VLANs, routing and packet inspection.</div>
-    </div>
-    <div class="card cursor-pointer" onclick="toggle('s3')">
-        Python Security Automation
-        <div id="s3" class="hidden mt-3 text-sm">Developed ransomware behavior detection prototype.</div>
-    </div>
+
+<div class="card">SIEM Log Analysis</div>
+<div class="card">Incident Detection</div>
+<div class="card">Network Security</div>
+<div class="card">Security Monitoring</div>
+<div class="card">Threat Investigation</div>
+<div class="card">Python Security Automation</div>
+
 </div>
+
 </section>
 
 <!-- TOOLKIT -->
-<section id="toolkit" class="section max-w-4xl mx-auto">
+
+<section id="toolkit" class="section">
+
 <h2 class="text-3xl mb-6">Security Toolkit</h2>
+
 <div class="grid md:grid-cols-3 gap-4">
-    <div class="card">Splunk</div>
-    <div class="card">Wireshark</div>
-    <div class="card">Cisco Packet Tracer</div>
+
+<div class="card">Splunk</div>
+<div class="card">Wireshark</div>
+<div class="card">Cisco Packet Tracer</div>
+
 </div>
+
 </section>
 
 <!-- CERTIFICATIONS -->
-<section id="certifications" class="section max-w-4xl mx-auto">
+
+<section id="certifications" class="section">
+
 <h2 class="text-3xl mb-6">Certifications</h2>
+
 <div class="space-y-3">
-    <div class="card">AWS Certified Solutions Architect – Associate</div>
-    <div class="card">Microsoft Azure Fundamentals (AZ-900)</div>
-    <div class="card">Cisco Networking Basics</div>
-    <div class="card">Splunk Fundamentals (SIEM & Log Analysis)</div>
+
+<div class="card">AWS Certified Solutions Architect – Associate</div>
+<div class="card">Microsoft Azure Fundamentals (AZ-900)</div>
+<div class="card">Networking Basics – Cisco</div>
+<div class="card">Splunk Fundamentals</div>
+
 </div>
+
 </section>
 
 <!-- PROJECTS -->
-<section id="projects" class="section max-w-5xl mx-auto">
+
+<section id="projects" class="section">
+
 <h2 class="text-3xl mb-6">Projects</h2>
+
 <div class="grid md:grid-cols-3 gap-6">
-    <div class="card">
-        <h3 class="text-xl mb-2">SIEM Log Analysis</h3>
-        <p>Splunk dashboards and threat detection.</p>
-        <a href="https://github.com/guruabhaymagapu/cybersecurity/tree/main/soc-labs/siem-splunk" target="_blank">View Project</a>
-    </div>
-    <div class="card">
-        <h3 class="text-xl mb-2">SOC Networking Lab</h3>
-        <p>Cisco Packet Tracer networking SOC lab.</p>
-        <a href="https://github.com/guruabhaymagapu/cybersecurity/tree/main/soc-labs/networking" target="_blank">View Project</a>
-    </div>
-    <div class="card">
-        <h3 class="text-xl mb-2">Ransomware Detection System</h3>
-        <p>Python file monitoring prototype.</p>
-        <a href="https://github.com/guruabhaymagapu/Ransomware-Detection-System" target="_blank">View Project</a>
-    </div>
+
+<div class="card">
+<h3 class="text-xl mb-2">SIEM Log Analysis</h3>
+<p>Splunk dashboards and threat detection.</p>
+<a href="https://github.com/guruabhaymagapu">View Project</a>
 </div>
+
+<div class="card">
+<h3 class="text-xl mb-2">SOC Networking Lab</h3>
+<p>Cisco Packet Tracer SOC lab.</p>
+<a href="https://github.com/guruabhaymagapu">View Project</a>
+</div>
+
+<div class="card">
+<h3 class="text-xl mb-2">Ransomware Detection System</h3>
+<p>Python ransomware behavior monitoring.</p>
+<a href="https://github.com/guruabhaymagapu">View Project</a>
+</div>
+
+</div>
+
+</section>
+
+<!-- PUBLICATIONS -->
+
+<section id="publications" class="section">
+
+<h2 class="text-3xl mb-6">Publications</h2>
+
+<div class="grid md:grid-cols-3 gap-6">
+
+<div class="card">
+<h3 class="font-bold">Detect, React: Ransomware Detection System</h3>
+<p>ResearchGate · May 5, 2025</p>
+<a href="https://www.researchgate.net/publication/391400165_Detect_React_Recover_A_Hands-On_Ransomware_Defense_System" target="_blank">Show Publication</a>
+</div>
+
+<div class="card">
+<h3 class="font-bold">Old Errors, New Threats: IP Spoofing</h3>
+<p>ResearchGate · Apr 16, 2025</p>
+<a href="https://www.researchgate.net/publication/391280137_Old_Errors_New_Threats_The_Ongoing_Impact_of_IP_Spoofing_in_Modern_Infrastructure" target="_blank">Show Publication</a>
+</div>
+
+<div class="card">
+<h3 class="font-bold">Reconfigurable Intelligent Surfaces for 6G</h3>
+<p>ResearchGate · Jul 24, 2024</p>
+<a href="https://www.researchgate.net/publication/389712533_Reconfigurable_intelligent_surfaces_for_6G_and_Beyond_communication" target="_blank">Show Publication</a>
+</div>
+
+</div>
+
 <div class="text-center mt-10">
-<a href="https://github.com/guruabhaymagapu" target="_blank" class="bg-green-400 text-black px-6 py-3 rounded">More Projects</a>
+
+<a href="https://www.researchgate.net/" class="bg-green-400 text-black px-6 py-3 rounded">
+
+View More Publications
+
+</a>
+
 </div>
+
 </section>
 
 <!-- SOC DASHBOARD -->
-<section id="dashboard" class="section max-w-5xl mx-auto">
-<h2 class="text-3xl mb-6">SOC Monitoring Dashboard</h2>
+
+<section id="dashboard" class="section">
+
+<h2 class="text-3xl mb-6">SOC Dashboard</h2>
+
 <div class="grid md:grid-cols-4 gap-4 text-center">
-    <div class="card">Threat Alerts <h3 id="alerts" class="text-3xl">0</h3></div>
-    <div class="card">Blocked IPs <h3 id="ips" class="text-3xl">0</h3></div>
-    <div class="card">Malware Events <h3 id="malware" class="text-3xl">0</h3></div>
-    <div class="card">Suspicious Logins <h3 id="logins" class="text-3xl">0</h3></div>
+
+<div class="card">Threat Alerts <h3 id="alerts">0</h3></div>
+<div class="card">Blocked IPs <h3 id="ips">0</h3></div>
+<div class="card">Malware Events <h3 id="malware">0</h3></div>
+<div class="card">Suspicious Logins <h3 id="logins">0</h3></div>
+
 </div>
+
+</section>
+
 <script>
+
 setInterval(()=>{
-    document.getElementById("alerts").innerText=Math.floor(Math.random()*50)
-    document.getElementById("ips").innerText=Math.floor(Math.random()*100)
-    document.getElementById("malware").innerText=Math.floor(Math.random()*20)
-    document.getElementById("logins").innerText=Math.floor(Math.random()*10)
-},2000)
+
+document.getElementById("alerts").innerText=Math.floor(Math.random()*50);
+document.getElementById("ips").innerText=Math.floor(Math.random()*100);
+document.getElementById("malware").innerText=Math.floor(Math.random()*20);
+document.getElementById("logins").innerText=Math.floor(Math.random()*10);
+
+},2000);
+
 </script>
 
 <!-- LIVE SOC FEED -->
-<section id="livefeed" class="section max-w-4xl mx-auto">
+
+<section id="livefeed" class="section">
+
 <h2 class="text-3xl mb-6">Live SOC Feed</h2>
-<div class="logbox" id="soc-logs"></div>
+
+<div class="logbox" id="logs"></div>
+
 </section>
+
 <script>
-const socLogs=[
+
+const logs=[
 "[INFO] User login success",
 "[WARN] Suspicious DNS request",
 "[ALERT] Possible brute force attack",
-"[CRITICAL] Malware signature detected",
-"[INFO] Firewall rule applied"
+"[CRITICAL] Malware signature detected"
 ];
-function addSocLog(){
-    const box=document.getElementById("soc-logs");
-    const log=document.createElement("div");
-    const msg=socLogs[Math.floor(Math.random()*socLogs.length)];
-    log.textContent=new Date().toLocaleTimeString()+" "+msg;
-    if(msg.includes("[INFO]")) log.style.color="#00ff9c";
-    else if(msg.includes("[WARN]")) log.style.color="#ffd700";
-    else if(msg.includes("[ALERT]")) log.style.color="#ff4500";
-    else if(msg.includes("[CRITICAL]")) log.style.color="#c71585";
-    box.prepend(log);
-    if(box.children.length>12) box.removeChild(box.lastChild);
-}
-setInterval(addSocLog,1200);
-</script>
 
-<!-- FUTURE IMPROVEMENT -->
-<section id="future" class="section max-w-5xl mx-auto">
-<h2 class="text-3xl mb-6">Future SOC Simulation</h2>
-<div class="w-full h-64 relative bg-black rounded-lg overflow-hidden">
-<canvas id="packetSim" width="800" height="250"></canvas>
-</div>
-<script>
-const canvasSim=document.getElementById("packetSim");
-const ctxSim=canvasSim.getContext("2d");
-const packets=[];
-for(let i=0;i<30;i++){
-    packets.push({x:Math.random()*800, y:Math.random()*250, speed:1+Math.random()*2});
-}
-function drawPackets(){
-    ctxSim.fillStyle="rgba(0,0,0,0.2)";
-    ctxSim.fillRect(0,0,800,250);
-    packets.forEach(p=>{
-        ctxSim.fillStyle="#00ff9c";
-        ctxSim.beginPath();
-        ctxSim.arc(p.x,p.y,3,0,Math.PI*2);
-        ctxSim.fill();
-        p.x+=p.speed;
-        if(p.x>800) p.x=0;
-    });
-}
-setInterval(drawPackets,50);
-</script>
-</section>
+function addLog(){
 
-<!-- GITHUB ACTIVITY -->
-<section class="section text-center">
-<h2 class="text-3xl mb-6">GitHub Activity</h2>
-<img src="https://ghchart.rshah.org/guruabhaymagapu" class="mx-auto border border-green-500 rounded-lg">
-</section>
+const box=document.getElementById("logs");
+
+const msg=logs[Math.floor(Math.random()*logs.length)];
+
+const log=document.createElement("div");
+
+log.textContent=new Date().toLocaleTimeString()+" "+msg;
+
+if(msg.includes("INFO"))log.style.color="#00ff9c";
+if(msg.includes("WARN"))log.style.color="yellow";
+if(msg.includes("ALERT"))log.style.color="orange";
+if(msg.includes("CRITICAL"))log.style.color="red";
+
+box.prepend(log);
+
+if(box.children.length>12)box.removeChild(box.lastChild);
+
+}
+
+setInterval(addLog,1200);
+
+</script>
 
 <!-- CONTACT -->
+
 <section id="contact" class="section text-center">
+
 <h2 class="text-3xl mb-6">Contact</h2>
-<div class="space-x-6">
-<a href="https://github.com/guruabhaymagapu">GitHub</a>
-<a href="https://www.linkedin.com/in/guruabhay-magapu">LinkedIn</a>
-<a href="mailto:guruabhaymagapu@gmail.com">Email</a>
-</div>
+
+<a href="https://github.com/guruabhaymagapu">GitHub</a> |
+<a href="https://www.linkedin.com/">LinkedIn</a> |
+<a href="mailto:your@email.com">Email</a>
+
 </section>
 
-<!-- COPYRIGHT -->
-<footer class="text-center py-6 text-gray-500 text-sm">
+<footer class="text-center py-6 text-gray-500">
+
 © 2026 Guru Abhay Magapu | All rights reserved
+
 </footer>
 
-<script>
-function toggle(id){document.getElementById(id).classList.toggle("hidden")}
-</script>
 </body>
 </html>
