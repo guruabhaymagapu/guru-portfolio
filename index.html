@@ -3,7 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Guru Abhay Magapu | SOC Analyst</title>
+
+<!-- Primary SEO Title -->
+<title>Guru Abhay Magapu | SOC Analyst & SIEM Splunk Specialist</title>
+
+<!-- Meta Descriptions for Google Search Snippets -->
+<meta name="description" content="Professional portfolio of Guru Abhay Magapu, a SOC Analyst specializing in SIEM (Splunk), network security, and threat intelligence. View my research publications and cloud certifications.">
+<meta name="keywords" content="Guru Abhay Magapu, Guru Abhay, Abhay Magapu, SOC Analyst, Splunk SIEM, Cybersecurity Portfolio, Incident Detection, India Cybersecurity">
+<meta name="author" content="Guru Abhay Magapu">
+
+<!-- Canonical Link (Prevents Duplicate Content Issues) -->
+<link rel="canonical" href="https://github.io">
+
+<!-- Open Graph Meta Tags (Optimizes how your link looks when shared on LinkedIn or X) -->
+<meta property="og:title" content="Guru Abhay Magapu | SOC Analyst Portfolio">
+<meta property="og:description" content="Aspiring Cybersecurity Analyst focused on SOC operations, threat detection, and cloud security. Check out my latest ResearchGate publications.">
+<meta property="og:image" content="https://github.ioprofile.jpg">
+<meta property="og:url" content="https://github.io">
+<meta property="og:type" content="profile">
+
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
@@ -200,7 +218,8 @@ type();
 
 <div class="flex justify-between items-center max-w-6xl mx-auto">
 
-<div class="text-lg font-bold">SOC Portfolio</div>
+<!-- SEO Optimization: Changed generic header text to exact name match -->
+<div class="text-lg font-bold">Guru Abhay Magapu</div>
 
 <button id="menuBtn" class="md:hidden text-xl">☰</button>
 
@@ -257,7 +276,8 @@ Incident Detection | Network Security | AWS & Azure Certified
 
 <div class="flex flex-col md:flex-row items-center gap-6 justify-center">
 
-<img src="profile.jpg" class="w-48 h-48 rounded-lg border-2 border-green-500">
+<!-- SEO Optimization: Added custom name title and alt tag descriptions -->
+<img src="profile.jpg" alt="Guru Abhay Magapu - SOC Analyst Profile Image" title="Guru Abhay Magapu" class="w-48 h-48 rounded-lg border-2 border-green-500">
 
 <p class="max-w-xl text-left text-gray-300">
 
@@ -337,22 +357,21 @@ Python security automation, and threat analysis.
 <div class="card">
 <h3 class="text-xl mb-2">SIEM Log Analysis</h3>
 <p>Splunk dashboards and threat detection.</p>
-<a href="https://github.com/guruabhaymagapu">View Project</a>
+<a href="https://github.com/guruabhaymagapu" aria-label="View SIEM Log Analysis project by Guru Abhay Magapu">View Project</a>
 </div>
 
 <div class="card">
 <h3 class="text-xl mb-2">SOC Networking Lab</h3>
 <p>Cisco Packet Tracer SOC lab.</p>
-<a href="https://github.com/guruabhaymagapu">View Project</a>
+<a href="https://github.com/guruabhaymagapu" aria-label="View SOC Networking Lab project by Guru Abhay Magapu">View Project</a>
 </div>
 
 <div class="card">
 <h3 class="text-xl mb-2">Ransomware Detection System</h3>
 <p>Python ransomware behavior monitoring.</p>
-<a href="https://github.com/guruabhaymagapu">View Project</a>
+<a href="https://github.com/guruabhaymagapu" aria-label="View Ransomware Detection System project by Guru Abhay Magapu">View Project</a>
 </div>
 
-</div>
 </div>
 
 <div class="text-center mt-10">
@@ -410,94 +429,3 @@ View More Publications
 <section id="dashboard" class="section">
 
 <h2 class="text-3xl mb-6">SOC Dashboard</h2>
-
-<div class="grid md:grid-cols-4 gap-4 text-center">
-
-<div class="card">Threat Alerts <h3 id="alerts" class="text-3xl mt-2">0</h3></div>
-<div class="card">Blocked IPs <h3 id="ips" class="text-3xl mt-2">0</h3></div>
-<div class="card">Malware Events <h3 id="malware" class="text-3xl mt-2">0</h3></div>
-<div class="card">Suspicious Logins <h3 id="logins" class="text-3xl mt-2">0</h3></div>
-
-</div>
-
-</section>
-
-<script>
-
-setInterval(()=>{
-
-document.getElementById("alerts").innerText=Math.floor(Math.random()*50);
-document.getElementById("ips").innerText=Math.floor(Math.random()*100);
-document.getElementById("malware").innerText=Math.floor(Math.random()*20);
-document.getElementById("logins").innerText=Math.floor(Math.random()*10);
-
-},2000);
-
-</script>
-
-<!-- LIVE SOC FEED -->
-
-<section id="livefeed" class="section">
-
-<h2 class="text-3xl mb-6">Live SOC Feed</h2>
-
-<div class="logbox" id="logs"></div>
-
-</section>
-
-<script>
-
-const logs=[
-"[INFO] User login success",
-"[WARN] Suspicious DNS request",
-"[ALERT] Possible brute force attack",
-"[CRITICAL] Malware signature detected"
-];
-
-function addLog(){
-
-const box=document.getElementById("logs");
-
-const msg=logs[Math.floor(Math.random()*logs.length)];
-
-const log=document.createElement("div");
-
-log.textContent=new Date().toLocaleTimeString()+" "+msg;
-
-if(msg.includes("INFO"))log.style.color="#00ff9c";
-if(msg.includes("WARN"))log.style.color="yellow";
-if(msg.includes("ALERT"))log.style.color="orange";
-if(msg.includes("CRITICAL"))log.style.color="red";
-
-box.prepend(log);
-
-if(box.children.length>12)box.removeChild(box.lastChild);
-
-}
-
-setInterval(addLog,1200);
-
-</script>
-
-<!-- CONTACT -->
-
-<section id="contact" class="section text-center">
-
-<h2 class="text-3xl mb-6">Contact</h2>
-
-<a href="https://github.com/guruabhaymagapu">GitHub</a> |
-<a href="https://www.linkedin.com/in/guruabhay-magapu/">LinkedIn</a> |
-<a href="mailto:guruabhay123@gmail.com">Email</a>
-
-</section>
-
-<footer class="text-center py-6 text-gray-500">
-
-© 2026 Guru Abhay Magapu | All rights reserved
-
-</footer>
-
-</body>
-</html>
-
-
